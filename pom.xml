@@ -49,4 +49,27 @@
             <version>${springdoc.version}</version>
         </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <!--
+                set JAVA_HOME=C:\Program Files\Eclipse Adoptium\jdk-17.0.4.1+1
+                mvn spring-boot:build-image
+                docker push  ygmarchi/codylab-rookie:1.0-SNAPSHOT
+            -->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <imageName>ygmarchi/${project.name}:${project.version}</imageName>
+                    <docker>
+                        <publishRegistry>
+                            <username>carlo.marchiori@gmail.com</username>
+                        </publishRegistry>
+                    </docker>
+                </configuration>
+
+            </plugin>
+        </plugins>
+    </build>
 </project>
