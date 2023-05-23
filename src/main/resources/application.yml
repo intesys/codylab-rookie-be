@@ -10,3 +10,7 @@ spring:
     username: postgres
     password: admin
 
+springdoc:
+  swagger-ui:
+    url: /v3/api-docs.yaml
+
