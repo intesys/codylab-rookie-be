@@ -20,6 +20,8 @@ public class Patient {
     private Boolean chronicPatient;
     private Instant lastAdmission;
     private Doctor lastDoctorVisited;
+    private List<PatientRecord> patientRecords;
+
     public Patient() {
     }
     public Patient(Long id) {
@@ -136,6 +138,16 @@ public class Patient {
 
     public void setLastDoctorVisited(Doctor lastDoctorVisited) {
         this.lastDoctorVisited = lastDoctorVisited;
+    }
+
+    public List<PatientRecord> getPatientRecords() {
+        if (patientRecords == null)
+            patientRecords = new ArrayList<>();
+        return patientRecords;
+    }
+
+    public void setPatientRecords(List<PatientRecord> patientRecords) {
+        this.patientRecords = patientRecords;
     }
 
     @Override

@@ -13,6 +13,8 @@ import org.springframework.stereotype.Component;
 public class PatientMapper {
     @Autowired
     private DoctorRepository doctorRepository;
+    @Autowired
+    PatientRecordMapper patientRecordMapper;
     public Patient toEntity(PatientDTO patientDTO) {
         if (patientDTO == null)
             return null;
@@ -61,6 +63,11 @@ public class PatientMapper {
         patientDTO.setOpd(patient.getOpd());
         patientDTO.setPhoneNumber(patient.getPhoneNumber());
         patientDTO.setSurname(patient.getSurname());
+        if (patient.getPatientRecords() != null)
+            patientDTO.setPatientRecords(patient.getPatientRecords()
+                    .stream()
+                    .map(patientRecordMapper::toDTO)
+                    .toList());
 
         return patientDTO;
     }

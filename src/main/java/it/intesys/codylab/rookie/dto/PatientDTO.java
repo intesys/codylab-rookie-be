@@ -34,6 +34,8 @@ public class PatientDTO {
     private Instant lastAdmission;
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private Long lastDoctorVisitedId;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private List<PatientRecordDTO> patientRecords;
 //    items:
 //    format: object
 //    $ref: "#/components/schemas/"
@@ -159,5 +161,12 @@ public class PatientDTO {
 
     public void setId(Long id) {
         this.id = id;
+    }
+    public List<PatientRecordDTO> getPatientRecords() {
+        return patientRecords;
+    }
+
+    public void setPatientRecords(List<PatientRecordDTO> patientRecords) {
+        this.patientRecords = patientRecords;
     }
 }
