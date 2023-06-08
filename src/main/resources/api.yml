@@ -1,0 +1,424 @@
+openapi: 3.0.1
+info:
+  title: Open Hospital API
+  version: v0
+servers:
+  - url: http://localhost:8081
+    description: Generated server url
+paths:
+  /api/patientRecord/{id}:
+    get:
+      tags:
+        - patient-record-api
+      operationId: getPatientRecord
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PatientRecordDTO'
+    put:
+      tags:
+        - patient-record-api
+      operationId: updatePatientRecord
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatientRecordDTO'
+        required: true
+      responses:
+        "200":
+          description: OK
+    delete:
+      tags:
+        - patient-record-api
+      operationId: deletePatientRecord
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: OK
+  /api/patient/{id}:
+    get:
+      tags:
+        - patient-api
+      operationId: getPatient
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PatientDTO'
+    put:
+      tags:
+        - patient-api
+      operationId: updatePatient
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatientDTO'
+        required: true
+      responses:
+        "200":
+          description: OK
+    delete:
+      tags:
+        - patient-api
+      operationId: deletePatient
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: OK
+  /api/doctor/{id}:
+    get:
+      tags:
+        - doctor-api
+      operationId: getDoctor
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DoctorDTO'
+    put:
+      tags:
+        - doctor-api
+      operationId: updateDoctor
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DoctorDTO'
+        required: true
+      responses:
+        "200":
+          description: OK
+    delete:
+      tags:
+        - doctor-api
+      operationId: deleteDoctor
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: OK
+  /api/patient:
+    post:
+      tags:
+        - patient-api
+      operationId: createPatient
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatientDTO'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PatientDTO'
+  /api/patientRecord:
+    post:
+      tags:
+        - patient-record-api
+      operationId: createPatientRecord
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatientRecordDTO'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PatientRecordDTO'
+  /api/patient/filter:
+    post:
+      tags:
+        - patient-api
+      operationId: getListPatient
+      parameters:
+        - name: page
+          in: query
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - name: size
+          in: query
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - name: sort
+          in: query
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatientFilterDTO'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PatientDTO'
+  /api/doctor:
+    post:
+      tags:
+        - doctor-api
+      operationId: createDoctor
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DoctorDTO'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DoctorDTO'
+  /api/doctor/filter:
+    post:
+      tags:
+        - doctor-api
+      operationId: getListDoctor
+      parameters:
+        - name: page
+          in: query
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - name: size
+          in: query
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - name: sort
+          in: query
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DoctorFilterDTO'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DoctorDTO'
+components:
+  schemas:
+    DoctorDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        surname:
+          type: string
+        phoneNumber:
+          type: string
+        address:
+          type: string
+        email:
+          type: string
+        avatar:
+          type: string
+        profession:
+          type: string
+        latestPatients:
+          type: array
+          items:
+            $ref: '#/components/schemas/PatientDTO'
+    PatientDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        opd:
+          type: integer
+          format: int64
+        idp:
+          type: integer
+          format: int64
+        name:
+          type: string
+        surname:
+          type: string
+        phoneNumber:
+          type: integer
+          format: int64
+        address:
+          type: string
+        email:
+          type: string
+        avatar:
+          type: string
+        bloodGroup:
+          type: string
+          enum:
+            - ZERO_PLUS
+            - ZERO_MINUS
+            - A_PLUS
+            - A_MINUS
+            - B_PLUS
+            - B_MINUS
+            - AB_PLUS
+            - AB_MINUS
+        notes:
+          type: string
+        chronicPatient:
+          type: boolean
+        lastAdmission:
+          type: string
+          format: date-time
+        lastDoctorVisitedId:
+          type: integer
+          format: int64
+        patientRecords:
+          type: array
+          items:
+            $ref: '#/components/schemas/PatientRecordDTO'
+        doctorIds:
+          type: array
+          items:
+            type: integer
+            format: int64
+    PatientRecordDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        patientId:
+          type: integer
+          format: int64
+        doctor:
+          $ref: '#/components/schemas/DoctorDTO'
+        date:
+          type: string
+          format: date-time
+        typeVisit:
+          type: string
+        reasonVisit:
+          type: string
+        treatmentMade:
+          type: string
+    PatientFilterDTO:
+      type: object
+      properties:
+        text:
+          type: string
+        id:
+          type: integer
+          format: int64
+        opd:
+          type: integer
+          format: int64
+        idp:
+          type: integer
+          format: int64
+        doctorId:
+          type: integer
+          format: int64
+    DoctorFilterDTO:
+      type: object
+      properties:
+        name:
+          type: string
+        surname:
+          type: string
+        profession:
+          type: string
