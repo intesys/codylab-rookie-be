@@ -9,16 +9,14 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 public class PatientApi {
     public static final String API_DOCTOR_FILTER = "/api/patient/filter";
+    public static final String API_DOCTOR_ID = "/api/patient/{id}";
     public static final String API_DOCTOR = "/api/patient";
     @Autowired
     PatientService patientService;
@@ -43,6 +41,26 @@ public class PatientApi {
         if (sort == null || sort.isBlank())
             return "surname,asc";
         return sort;
+    }
+
+
+    @PutMapping(API_DOCTOR_ID)
+    public ResponseEntity<Void> updatePatient (@PathVariable("id") Long id, @RequestBody PatientDTO patientDTO) {
+        patientDTO.setId(id);
+        patientService.updatePatient (patientDTO);
+        return ResponseEntity.ok(null);
+    }
+
+    @GetMapping(API_DOCTOR_ID)
+    public ResponseEntity<PatientDTO> getPatient (@PathVariable("id") Long id) {
+        PatientDTO patientDTO = patientService.getPatient (id);
+        return ResponseEntity.ok(patientDTO);
+    }
+
+    @DeleteMapping(API_DOCTOR_ID)
+    public ResponseEntity<Void> deletePatient (@PathVariable("id") Long id) {
+        patientService.deletePatient (id);
+        return ResponseEntity.ok(null);
     }
 
 }

@@ -22,24 +22,44 @@ public class PatientRepository extends RookieRepository {
     // https://docs.spring.io/spring-framework/docs/3.0.x/spring-framework-reference/html/jdbc.html
     public void save (Patient patient) {
         Long lastDoctorVisitedId = patient.getLastDoctorVisited() != null ? patient.getLastDoctorVisited().getId() : null;
-        Long id = db.queryForObject("select nextval('id_generator')", Long.class);
-        db.update("insert into patient (id, opd, idp, name, surname, phone_number, address, email, avatar, blood_group, notes, chronic_patient, last_admission, last_doctor_visited_id) " +
-            "values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-            id,
-            patient.getOpd(),
-            patient.getIdp(),
-            patient.getName(),
-            patient.getSurname(),
-            patient.getPhoneNumber(),
-            patient.getAddress(),
-            patient.getEmail(),
-            patient.getAvatar(),
-            patient.getBloodGroup() != null? patient.getBloodGroup().toString(): null,
-            patient.getNotes(),
-            patient.getChronicPatient(),
-            patient.getLastAdmission(),
-                lastDoctorVisitedId);
-        patient.setId(id);
+        if (patient.getId() == null) {
+            Long id = db.queryForObject("select nextval('id_generator')", Long.class);
+            db.update("insert into patient (id, opd, idp, name, surname, phone_number, address, email, avatar, blood_group, notes, chronic_patient, last_admission, last_doctor_visited_id) " +
+                "values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                id,
+                patient.getOpd(),
+                patient.getIdp(),
+                patient.getName(),
+                patient.getSurname(),
+                patient.getPhoneNumber(),
+                patient.getAddress(),
+                patient.getEmail(),
+                patient.getAvatar(),
+                patient.getBloodGroup() != null? patient.getBloodGroup().toString(): null,
+                patient.getNotes(),
+                patient.getChronicPatient(),
+                patient.getLastAdmission(),
+                    lastDoctorVisitedId);
+            patient.setId(id);
+        } else {
+            db.update("update patient set opd = ?, idp = ?, name = ?, surname = ?, phone_number = ?, address = ?, " +
+                            "email = ?, avatar = ?, blood_group = ?, notes = ?, chronic_patient = ?, last_admission = ?, last_doctor_visited_id  = ? " +
+                            "where id = ?",
+                    patient.getOpd(),
+                    patient.getIdp(),
+                    patient.getName(),
+                    patient.getSurname(),
+                    patient.getPhoneNumber(),
+                    patient.getAddress(),
+                    patient.getEmail(),
+                    patient.getAvatar(),
+                    patient.getBloodGroup() != null? patient.getBloodGroup().toString(): null,
+                    patient.getNotes(),
+                    patient.getChronicPatient(),
+                    patient.getLastAdmission(),
+                    lastDoctorVisitedId,
+                    patient.getId());
+        }
         if (lastDoctorVisitedId != null)
             patient.setLastDoctorVisited(doctorRepository.findById(lastDoctorVisitedId));
     }
@@ -139,6 +159,16 @@ public class PatientRepository extends RookieRepository {
         if (!rs.wasNull())
             patient.setSurname(surname);
         return patient;
+    }
+
+    public Patient findById(Long id) {
+        return db.queryForObject("select * from patient where id = ? ", this::map, id);
+    }
+
+    public void deleteById(Long id) {
+        int update = db.update("delete from patient where id = ? ", id);
+        if (update == 0)
+            throw new NoSuchElementException(String.valueOf(id));
     }
 
 }

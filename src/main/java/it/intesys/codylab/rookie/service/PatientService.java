@@ -49,4 +49,18 @@ public class PatientService {
     private PatientDTO toDTO(Patient patient) {
         return mapper.toDTO(patient);
     }
+
+    public void updatePatient(PatientDTO patientDTO) {
+        Patient patient = mapper.toEntity(patientDTO);
+        patientRepository.save(patient);
+    }
+
+    public PatientDTO getPatient(Long id) {
+        Patient patient = patientRepository.findById(id);
+        return toDTO(patient);
+    }
+
+    public void deletePatient(Long id) {
+        patientRepository.deleteById(id);
+    }
 }
