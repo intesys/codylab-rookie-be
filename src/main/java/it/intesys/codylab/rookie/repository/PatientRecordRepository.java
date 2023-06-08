@@ -28,17 +28,29 @@ public class PatientRecordRepository extends RookieRepository {
     public void save (PatientRecord patientRecord) {
         Long doctor = Optional.ofNullable(patientRecord.getDoctor()).map(Doctor::getId).orElse(null);
         Long patient = Optional.ofNullable(patientRecord.getPatient()).map(Patient::getId).orElse(null);
-        Long id = db.queryForObject("select nextval('id_generator')", Long.class);
-        db.update("insert into patient_record (id, date, doctor_id, patient_id, reason_visit, treatment_made, type_visit) " +
-            "values (?, ?, ?, ?, ?, ?, ?)",
-            id,
-            Timestamp.from(patientRecord.getDate()),
-            doctor,
-            patient,
-            patientRecord.getReasonVisit(),
-            patientRecord.getTreatmentMade(),
-            patientRecord.getTypeVisit());
-        patientRecord.setId(id);
+        if (patientRecord.getId() == null) {
+            Long id = db.queryForObject("select nextval('id_generator')", Long.class);
+            db.update("insert into patient_record (id, date, doctor_id, patient_id, reason_visit, treatment_made, type_visit) " +
+                "values (?, ?, ?, ?, ?, ?, ?)",
+                id,
+                Timestamp.from(patientRecord.getDate()),
+                doctor,
+                patient,
+                patientRecord.getReasonVisit(),
+                patientRecord.getTreatmentMade(),
+                patientRecord.getTypeVisit());
+            patientRecord.setId(id);
+        } else {
+            db.update("update patient_record set date = ?, doctor_id = ?, patient_id = ?, reason_visit = ?, treatment_made = ?, type_visit  = ? " +
+                "where id = ?",
+                Timestamp.from(patientRecord.getDate()),
+                doctor,
+                patient,
+                patientRecord.getReasonVisit(),
+                patientRecord.getTreatmentMade(),
+                patientRecord.getTypeVisit(),
+                patientRecord.getId());
+        }
     }
 
     private PatientRecord map(ResultSet rs, int rownum) throws SQLException {
@@ -65,6 +77,15 @@ public class PatientRecordRepository extends RookieRepository {
         if (!rs.wasNull())
             patientRecord.setTypeVisit(typeVisit);
         return patientRecord;
+    }
+    public PatientRecord findById(Long id) {
+        return db.queryForObject("select * from patient_record where id = ? ", this::map, id);
+    }
+
+    public void deleteById(Long id) {
+        int update = db.update("delete from patient_record where id = ? ", id);
+        if (update == 0)
+            throw new NoSuchElementException(String.valueOf(id));
     }
     public List<PatientRecord> findByPatient(Patient patient) {
         return db.query("select * from patient_record where patient_id = ? order by date desc", this::map, patient.getId());

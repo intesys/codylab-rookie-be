@@ -25,7 +25,15 @@ public class PatientRecordService {
     DoctorRepository doctorRepository;
     public PatientRecordDTO createPatientRecord(PatientRecordDTO patientRecordDTO) {
         PatientRecord patientRecord = mapper.toEntity(patientRecordDTO);
+        save(patientRecord);
+        return mapper.toDTO(patientRecord);
+    }
+    public void updatePatientRecord(PatientRecordDTO patientRecordDTO) {
+        PatientRecord patientRecord = mapper.toEntity(patientRecordDTO);
+        save(patientRecord);
+    }
 
+    private void save(PatientRecord patientRecord) {
         if (patientRecord.getDate() == null)
             patientRecord.setDate(Instant.now());
         if (patientRecord.getPatient() == null)
@@ -34,6 +42,14 @@ public class PatientRecordService {
             throw new IllegalArgumentException("No doctor");
 
         patientRecordRepository.save(patientRecord);
+    }
+
+
+    public PatientRecordDTO getPatientRecord(Long id) {
+        PatientRecord patientRecord = patientRecordRepository.findById(id);
         return mapper.toDTO(patientRecord);
+    }
+    public void deletePatientRecord(Long id) {
+        patientRecordRepository.deleteById(id);
     }
 }
