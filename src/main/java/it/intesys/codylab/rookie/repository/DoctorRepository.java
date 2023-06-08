@@ -10,25 +10,39 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Repository
 public class DoctorRepository extends RookieRepository {
     // https://docs.spring.io/spring-framework/docs/3.0.x/spring-framework-reference/html/jdbc.html
     public void save (Doctor doctor) {
-        Long id = db.queryForObject("select nextval('id_generator')", Long.class);
-        db.update("insert into doctor (id, name, surname, phone_number, address, email, avatar, profession) " +
-            "values (?, ?, ?, ?, ?, ?, ?, ?)",
-            id,
-            doctor.getName(),
-            doctor.getSurname(),
-            doctor.getPhoneNumber(),
-            doctor.getAddress(),
-            doctor.getEmail(),
-            doctor.getAvatar(),
-            doctor.getProfession());
-        doctor.setId(id);
-    }
+        if (doctor.getId() == null) {
+            Long id = db.queryForObject("select nextval('id_generator')", Long.class);
+            db.update("insert into doctor (id, name, surname, phone_number, address, email, avatar, profession) " +
+                            "values (?, ?, ?, ?, ?, ?, ?, ?)",
+                id,
+                doctor.getName(),
+                doctor.getSurname(),
+                doctor.getPhoneNumber(),
+                doctor.getAddress(),
+                doctor.getEmail(),
+                doctor.getAvatar(),
+                doctor.getProfession());
+            doctor.setId(id);
+        } else {
+            db.update("update doctor set name = ?, surname = ?, phone_number = ?, address = ?, email = ?, avatar = ?, profession = ? " +
+                            "where id = ?",
+                doctor.getName(),
+                doctor.getSurname(),
+                doctor.getPhoneNumber(),
+                doctor.getAddress(),
+                doctor.getEmail(),
+                doctor.getAvatar(),
+                doctor.getProfession(),
+                doctor.getId());
 
+        }
+    }
 
     public Page<Doctor> findAll(Pageable pageable, String name, String surname, String profession) {
         StringBuilder queryBuffer = new StringBuilder();
@@ -86,5 +100,15 @@ public class DoctorRepository extends RookieRepository {
         if (!rs.wasNull())
             doctor.setProfession(profession);
         return doctor;
+    }
+
+    public Doctor findById(Long id) {
+        return db.queryForObject("select * from doctor where id = ? ", this::map, id);
+    }
+
+    public void deleteById(Long id) {
+        int update = db.update("delete from doctor where id = ? ", id);
+        if (update == 0)
+            throw new NoSuchElementException(String.valueOf(id));
     }
 }

@@ -35,4 +35,19 @@ public class DoctorService {
         DoctorDTO dto = mapper.toDTO(doctor);
         return dto;
     }
+
+
+    public void updateDoctor(DoctorDTO doctorDTO) {
+        Doctor doctor = mapper.toEntity(doctorDTO);
+        doctorRepository.save(doctor);
+    }
+
+    public DoctorDTO getDoctor(Long id) {
+        Doctor doctor = doctorRepository.findById(id);
+        return toDTO(doctor);
+    }
+
+    public void deleteDoctor(Long id) {
+        doctorRepository.deleteById(id);
+    }
 }

@@ -9,10 +9,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 /*
     https://spring.io/guides/tutorials/rest/
@@ -21,6 +19,7 @@ import java.util.List;
 public class DoctorApi {
     public static final String API_DOCTOR = "/api/doctor";
     public static final String API_DOCTOR_FILTER = "/api/doctor/filter";
+    public static final String API_DOCTOR_ID = "/api/doctor/{id}";
 
     @Autowired
     DoctorService doctorService;
@@ -46,4 +45,25 @@ public class DoctorApi {
             return "surname,asc";
         return sort;
     }
+
+
+    @PutMapping(API_DOCTOR_ID)
+    public ResponseEntity<Void> updateDoctor (@PathVariable("id") Long id, @RequestBody DoctorDTO doctorDTO) {
+        doctorDTO.setId(id);
+        doctorService.updateDoctor (doctorDTO);
+        return ResponseEntity.ok(null);
+    }
+
+    @GetMapping(API_DOCTOR_ID)
+    public ResponseEntity<DoctorDTO> getDoctor (@PathVariable("id") Long id) {
+        DoctorDTO doctorDTO = doctorService.getDoctor (id);
+        return ResponseEntity.ok(doctorDTO);
+    }
+
+    @DeleteMapping(API_DOCTOR_ID)
+    public ResponseEntity<Void> deleteDoctor (@PathVariable("id") Long id) {
+        doctorService.deleteDoctor (id);
+        return ResponseEntity.ok(null);
+    }
+
 }
