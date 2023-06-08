@@ -10,9 +10,8 @@ L'architettura del software è mostrata nel seguente schema
 
 <img src="docs/architettura.jpg"/>
 
-# Programma
 
-## Giorno 1
+## Preparazione
 
 - Presentazione progetto
 - Installazione software
@@ -24,32 +23,21 @@ L'architettura del software è mostrata nel seguente schema
     - postgres https://sbp.enterprisedb.com/getfile.jsp?fileid=1258478
     - dbeaver https://dbeaver.io/files/dbeaver-ce-latest-x86_64-setup.exe
 - Descrizione approccio api first (api.yml)
+
+# Programma
+
+## Giorno 1
+
 - Importazione in postman dell'api
-- Creazione progetto
+- Clone progetto github
 
                        git clone  https://github.com/ygmarchi/codylab-rookie.git -b <nome>
 
-- Descrittore progetto maven (pom.xml)
+- Creazione progetto intellij
 - Class main
 - Importazione spring boot
-- Primo controller
+- Controller creazione doctor
+- Servizio creazione doctor
+- Inizializzazione db tramite flyway
+- Repository creazione doctor
 - Test postman
-
-## Servizi
-- Definizione servizio, linguaggio yaml
-- Verifica del servizio tramite postman
-- Implementazione di un servizio/operazione: controller, service, repository
-
-## Base dati
-- definizione del database via sql/flyway
-- verifica del database creato tramite il diagramma ER generato da dbeaver
-
-## Acesso ai dati
-- Entità JPA
-- relazioni one-to-one, one-to-many, many-to-many
-- repository Spring
-
-## Transazioni
-- Creazione di un servizio Spring
-- mapping strutture dati servizio <-> controller (mapstruct)
-- rimozione mockup e implementazione effettiva
