@@ -2,6 +2,7 @@ package it.intesys.codylab.rookie.service;
 
 import it.intesys.codylab.rookie.domain.Doctor;
 import it.intesys.codylab.rookie.domain.Patient;
+import it.intesys.codylab.rookie.domain.PatientDoctor;
 import it.intesys.codylab.rookie.domain.PatientRecord;
 import it.intesys.codylab.rookie.dto.PatientDTO;
 import it.intesys.codylab.rookie.dto.PatientFilterDTO;
@@ -55,6 +56,11 @@ public class PatientService {
     }
 
     private PatientDTO toDTO(Patient patient) {
+        List<PatientDoctor> doctors = doctorRepository.findByPatient(patient)
+                .stream()
+                .map(doctor -> new PatientDoctor(patient, doctor))
+                .toList();
+        patient.setDoctors(doctors);
         return mapper.toDTO(patient);
     }
 

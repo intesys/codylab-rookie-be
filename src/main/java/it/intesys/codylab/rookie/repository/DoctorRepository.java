@@ -1,6 +1,7 @@
 package it.intesys.codylab.rookie.repository;
 
 import it.intesys.codylab.rookie.domain.Doctor;
+import it.intesys.codylab.rookie.domain.Patient;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -110,5 +111,8 @@ public class DoctorRepository extends RookieRepository {
         int update = db.update("delete from doctor where id = ? ", id);
         if (update == 0)
             throw new NoSuchElementException(String.valueOf(id));
+    }
+    public List<Doctor> findByPatient(Patient patient) {
+        return db.query("select * from doctor where id in (select doctor_id from patient_doctor where patient_id = ?)", this::map, patient.getId());
     }
 }

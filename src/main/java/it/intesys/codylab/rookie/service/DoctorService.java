@@ -3,8 +3,11 @@ package it.intesys.codylab.rookie.service;
 import it.intesys.codylab.rookie.domain.Doctor;
 import it.intesys.codylab.rookie.dto.DoctorDTO;
 import it.intesys.codylab.rookie.dto.DoctorFilterDTO;
+import it.intesys.codylab.rookie.dto.PatientDTO;
 import it.intesys.codylab.rookie.mapper.DoctorMapper;
+import it.intesys.codylab.rookie.mapper.PatientMapper;
 import it.intesys.codylab.rookie.repository.DoctorRepository;
+import it.intesys.codylab.rookie.repository.PatientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -20,6 +23,11 @@ public class DoctorService {
     DoctorMapper mapper;
     @Autowired
     DoctorRepository doctorRepository;
+    @Autowired
+    PatientRepository patientRepository;
+    @Autowired
+    PatientMapper patientMapper;
+
     public DoctorDTO createDoctor(DoctorDTO doctorDTO) {
         Doctor doctor = mapper.toEntity(doctorDTO);
         doctorRepository.save(doctor);
@@ -33,6 +41,14 @@ public class DoctorService {
 
     private DoctorDTO toDTO(Doctor doctor) {
         DoctorDTO dto = mapper.toDTO(doctor);
+
+        List<PatientDTO> latestPatients = patientRepository
+                .findLatestByDoctor(doctor, 5)
+                .stream()
+                .map(patientMapper::toDTO)
+                .toList();
+        dto.setLatestPatients(latestPatients);
+
         return dto;
     }
 

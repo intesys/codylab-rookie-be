@@ -20,6 +20,7 @@ public class Patient {
     private Boolean chronicPatient;
     private Instant lastAdmission;
     private Doctor lastDoctorVisited;
+    private List<PatientDoctor> doctors;
     private List<PatientRecord> patientRecords;
 
     public Patient() {
@@ -138,6 +139,16 @@ public class Patient {
 
     public void setLastDoctorVisited(Doctor lastDoctorVisited) {
         this.lastDoctorVisited = lastDoctorVisited;
+    }
+
+    public List<PatientDoctor> getDoctors() {
+        if (doctors == null)
+            doctors = new ArrayList<>();
+        return doctors;
+    }
+
+    public void setDoctors(List<PatientDoctor> doctors) {
+        this.doctors = doctors;
     }
 
     public List<PatientRecord> getPatientRecords() {

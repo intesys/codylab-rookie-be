@@ -52,6 +52,11 @@ public class PatientMapper {
         if (patient.getBloodGroup() != null)
             patientDTO.setBloodGroup(BloodGroupDTO.valueOf(patient.getBloodGroup().name()));
         patientDTO.setChronicPatient(patient.getChronicPatient());
+        if (patient.getDoctors() != null)
+            patientDTO.setDoctorIds(patient.getDoctors()
+                    .stream()
+                    .map(patientDoctor -> patientDoctor.getDoctor().getId())
+                    .toList());
         patientDTO.setEmail(patient.getEmail());
         patientDTO.setIdp(patient.getIdp());
         patientDTO.setLastAdmission(patient.getLastAdmission());

@@ -1,5 +1,8 @@
 package it.intesys.codylab.rookie.service;
 
+import it.intesys.codylab.rookie.domain.Doctor;
+import it.intesys.codylab.rookie.domain.Patient;
+import it.intesys.codylab.rookie.domain.PatientDoctor;
 import it.intesys.codylab.rookie.domain.PatientRecord;
 import it.intesys.codylab.rookie.dto.PatientRecordDTO;
 import it.intesys.codylab.rookie.mapper.PatientRecordMapper;
@@ -11,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
+import java.util.List;
 
 @Service
 @Transactional
@@ -41,14 +45,24 @@ public class PatientRecordService {
         if (patientRecord.getDoctor() == null)
             throw new IllegalArgumentException("No doctor");
 
+        associatePatientDoctor(patientRecord);
+
         patientRecordRepository.save(patientRecord);
     }
 
+    private void associatePatientDoctor(PatientRecord patientRecord) {
+        Doctor doctor = patientRecord.getDoctor();
+        Patient patient = patientRecord.getPatient();
+        patient.setDoctors(List.of(new PatientDoctor(patient, doctor, Instant.now())));
+        patientRepository.save(patient);
+        patientRecord.setDoctor(doctorRepository.findById(patientRecord.getDoctor().getId()));
+    }
 
     public PatientRecordDTO getPatientRecord(Long id) {
         PatientRecord patientRecord = patientRecordRepository.findById(id);
         return mapper.toDTO(patientRecord);
     }
+
     public void deletePatientRecord(Long id) {
         patientRecordRepository.deleteById(id);
     }

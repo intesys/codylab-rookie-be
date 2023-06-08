@@ -3,10 +3,9 @@ package it.intesys.codylab.rookie.repository;
 import it.intesys.codylab.rookie.domain.BloodGroup;
 import it.intesys.codylab.rookie.domain.Doctor;
 import it.intesys.codylab.rookie.domain.Patient;
+import it.intesys.codylab.rookie.domain.PatientDoctor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
@@ -62,6 +61,27 @@ public class PatientRepository extends RookieRepository {
         }
         if (lastDoctorVisitedId != null)
             patient.setLastDoctorVisited(doctorRepository.findById(lastDoctorVisitedId));
+
+        List<PatientDoctor> patientDoctors = patient.getDoctors();
+        if (patientDoctors != null) {
+            List<PatientDoctor> currentDoctors = doctorRepository.findByPatient(patient)
+                    .stream()
+                    .map(doctor -> new PatientDoctor(patient, doctor))
+                    .toList();
+
+            List<PatientDoctor> insertions = subtract(patientDoctors, currentDoctors);
+            List<PatientDoctor> updates = intersect(patientDoctors, currentDoctors);
+            db.batchUpdate("insert into patient_doctor (patient_id, doctor_id, date) values (?, ?, ?)", insertions, 100, (statement, op) -> {
+                statement.setLong(1, op.getPatient().getId());
+                statement.setLong(2, op.getDoctor().getId());
+                statement.setTimestamp(3, Timestamp.from(op.getDate()));
+            });
+            db.batchUpdate("update patient_doctor set date = ? where patient_id = ? and doctor_id = ?", updates, 100, (statement, op) -> {
+                statement.setTimestamp(1, Timestamp.from(op.getDate()));
+                statement.setLong(2, op.getPatient().getId());
+                statement.setLong(3, op.getDoctor().getId());
+            });
+        }
     }
 
 
@@ -108,6 +128,20 @@ public class PatientRepository extends RookieRepository {
             parameters.add(doctor.getId());
         }
 
+        String query = pagingQuery(pageable, queryBuffer);
+
+        List<Patient> patients = db.query(query, this::map, parameters.toArray(Object[]::new));
+        return new PageImpl<>(patients, pageable, 0);
+    }
+
+    public Page<Patient> findLatestByDoctor(Doctor doctor, int limit) {
+        StringBuilder queryBuffer = new StringBuilder("select a.* from patient a " +
+                "join patient_doctor b on a.id = b.patient_id " +
+                "where b.doctor_id = ? ");
+
+        List<Object> parameters = List.of(doctor.getId());
+
+        PageRequest pageable = PageRequest.of(0, limit, Sort.by(Sort.Order.desc("date")));
         String query = pagingQuery(pageable, queryBuffer);
 
         List<Patient> patients = db.query(query, this::map, parameters.toArray(Object[]::new));
