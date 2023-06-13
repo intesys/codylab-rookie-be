@@ -1,6 +1,8 @@
-package it.intesys.codylab.rookie.api;
+package org.example;
 
-import it.intesys.codylab.rookie.dto.DoctorDTO;
+
+
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
