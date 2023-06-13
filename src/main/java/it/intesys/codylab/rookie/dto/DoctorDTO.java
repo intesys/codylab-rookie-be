@@ -3,10 +3,20 @@ package it.intesys.codylab.rookie.dto;
 public class DoctorDTO {
     private Long ID;
     private String name;
-    private String username;
+    private String surname;
     private String email;
     private String avatar;
+    private  String address;
     private String phoneNumber;
+    private String profession;
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
 
     public Long getID() {
         return ID;
@@ -24,12 +34,12 @@ public class DoctorDTO {
         this.name = name;
     }
 
-    public String getUsername() {
-        return username;
+    public String getSurname() {
+        return surname;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setSurname(String surname) {
+        this.surname = surname;
     }
 
     public String getEmail() {
@@ -56,13 +66,13 @@ public class DoctorDTO {
         this.phoneNumber = phoneNumber;
     }
 
-    public String getProfessioni() {
-        return professioni;
+    public String getProfession() {
+        return profession;
     }
 
-    public void setProfessioni(String professioni) {
-        this.professioni = professioni;
+    public void setProfession(String profession) {
+        this.profession = profession;
     }
 
-    String professioni;
+
 }
