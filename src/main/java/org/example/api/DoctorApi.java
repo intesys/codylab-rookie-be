@@ -7,7 +7,5 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class DoctorApi{
     @PostMapping ("/api/doctor")
-    ResponseEntity<DoctorDTO> createDoctor (@RequestBody DoctorDTO doctorDTO){
-        return ResponseEntity.ok(doctorDTO);
-    }
+    ResponseEntity<DoctorDTO> createDoctor (@RequestBody DoctorDTO doctorDTO) { return ResponseEntity.ok(doctorDTO);}
 }

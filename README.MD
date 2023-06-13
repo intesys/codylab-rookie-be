@@ -38,7 +38,7 @@ L'architettura del software è mostrata nel seguente schema
 ## Servizi
 - Definizione servizio, linguaggio yaml
 - Verifica del servizio tramite postman
-- Implementazione di un servizio/operazione: controller, service, repository
+- Implementazione di un servizio/operazione: controller, org.example.service, org.example.repository
 
 ## Base dati
 - definizione del database via sql/flyway
@@ -47,7 +47,7 @@ L'architettura del software è mostrata nel seguente schema
 ## Acesso ai dati
 - Entità JPA
 - relazioni one-to-one, one-to-many, many-to-many
-- repository Spring
+- org.example.repository Spring
 
 ## Transazioni
 - Creazione di un servizio Spring
