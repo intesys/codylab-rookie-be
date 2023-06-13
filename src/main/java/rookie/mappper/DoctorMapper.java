@@ -21,14 +21,14 @@ public class DoctorMapper implements Mapper<Doctor,DoctorDTO>{
     @Override
     public DoctorDTO toDTO(Doctor entity) {
         DoctorDTO dto= new DoctorDTO();
-        dto.setName(dto.getName());
-        dto.setSurname(dto.getSurname());
-        dto.setAddress(dto.getAddress());
-        dto.setAvatar(dto.getAvatar());
-        dto.setEmail(dto.getEmail());
-        dto.setId(dto.getId());
-        dto.setPhoneNumber(dto.getPhoneNumber());
-        dto.setProfession(dto.getProfession());
+        dto.setName(entity.getName());
+        dto.setSurname(entity.getSurname());
+        dto.setAddress(entity.getAddress());
+        dto.setAvatar(entity.getAvatar());
+        dto.setEmail(entity.getEmail());
+        dto.setId(entity.getId());
+        dto.setPhoneNumber(entity.getPhoneNumber());
+        dto.setProfession(entity.getProfession());
         return dto;
     }
 }
