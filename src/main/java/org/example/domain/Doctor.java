@@ -1,10 +1,6 @@
-package org.example.dto;
+package org.example.domain;
 
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-
-public class DoctorDTO {
+public class Doctor {
     private Long id;
     private String name;
     private String surname;
@@ -77,4 +73,5 @@ public class DoctorDTO {
     public void setProfession(String profession) {
         this.profession = profession;
     }
+
 }
