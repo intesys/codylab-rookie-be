@@ -4,12 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="966e6814-a107-4187-a0e0-64acc19dbcbe" name="Changes" comment="Creazione dottore">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rookie/api/DoctorAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rookie/api/DoctorAPI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rookie/dto/DoctorDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rookie/dto/DoctorDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
+    <list default="true" id="966e6814-a107-4187-a0e0-64acc19dbcbe" name="Changes" comment="Creazione Doctor, DoctorService, DoctorMapper, DoctorRepository, Mapper">
+      <change beforePath="$PROJECT_DIR$/.dbeaver/.project-metadata.json.bak" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.dbeaver/credentials-config.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.dbeaver/data-sources.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.dbeaver/project-metadata.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.dbeaver/project-settings.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Scripts/Script.sql" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -129,7 +130,14 @@
       <option name="project" value="LOCAL" />
       <updated>1686583360735</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Creazione Doctor, DoctorService, DoctorMapper, DoctorRepository, Mapper">
+      <created>1686670715598</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1686670715598</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -172,6 +180,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Creazione dottore" />
-    <option name="LAST_COMMIT_MESSAGE" value="Creazione dottore" />
+    <MESSAGE value="Creazione Doctor, DoctorService, DoctorMapper, DoctorRepository, Mapper" />
+    <option name="LAST_COMMIT_MESSAGE" value="Creazione Doctor, DoctorService, DoctorMapper, DoctorRepository, Mapper" />
   </component>
 </project>
