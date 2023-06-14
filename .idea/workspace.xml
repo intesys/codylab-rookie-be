@@ -5,12 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="966e6814-a107-4187-a0e0-64acc19dbcbe" name="Changes" comment="Creazione Doctor, DoctorService, DoctorMapper, DoctorRepository, Mapper">
-      <change beforePath="$PROJECT_DIR$/.dbeaver/.project-metadata.json.bak" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.dbeaver/credentials-config.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.dbeaver/data-sources.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.dbeaver/project-metadata.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.dbeaver/project-settings.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Scripts/Script.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rookie/api/DoctorAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rookie/api/DoctorAPI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rookie/repository/DoctorRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rookie/repository/DoctorRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rookie/service/DoctorService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rookie/service/DoctorService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -137,7 +135,14 @@
       <option name="project" value="LOCAL" />
       <updated>1686670715598</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Creazione Doctor, DoctorService, DoctorMapper, DoctorRepository, Mapper">
+      <created>1686671119997</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1686671119997</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
