@@ -29,12 +29,20 @@ public class DoctorApi {
     }
     @PostMapping("/api/doctor/filter")
     ResponseEntity<List<DoctorDTO>>getListDoctor (@RequestParam("page")Integer page, @RequestParam("size") Integer size, @RequestParam("sort") String sort,  @RequestBody DoctorFilterDTO filter){
-        Pageable pageable = pageable(page,size,sort);
+        Pageable pageable = pageable(page,size,sortString(sort));
         List<DoctorDTO> doctorDTOs = doctorService.getListDoctor(pageable, filter);
         return  ResponseEntity.ok(doctorDTOs);
     }
     private Pageable pageable(Integer pageIndex, Integer size, String sort){
+        Sort.by(List.of (new Sort.Order(Sort.Direction.ASC, "pippo")));
         return PageRequest.of(pageIndex,size, Sort.unsorted());
+    }
+
+    private  String sortString(String sort){
+        if(sort==null|| sort.isBlank()){
+            return "surname,asc";
+        }
+        return sort;
     }
 
 }
