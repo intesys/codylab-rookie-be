@@ -20,9 +20,10 @@ public class DoctorAPI {
     public static final String API_DOCTOR = "/api/doctor";
     @Autowired
     private DoctorService doctorService;
+
     @PostMapping(API_DOCTOR)
     ResponseEntity<DoctorDTO> createDoctor(@RequestBody DoctorDTO doctorDTO){
-        DoctorDTO doctor = doctorService.createDoctor(doctorDTO);
+        doctorDTO = doctorService.createDoctor(doctorDTO);
         return ResponseEntity.ok(doctorDTO);
     }
 
