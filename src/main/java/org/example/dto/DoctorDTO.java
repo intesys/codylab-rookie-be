@@ -1,4 +1,4 @@
-package it.intesys.codylab.rookie.dto;
+package org.example.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;

@@ -1,7 +1,9 @@
 package org.example.repository;
 
+import org.example.Exception.NotFound;
 import org.example.domain.Doctor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -112,7 +114,22 @@ public class DoctorRepository {
             doctor.setProfession(profession);
         return doctor;
     }
+
+    public void remove(Long id)  throws NotFound {
+        findById(id);
+        db.update("delete from doctor where id = ?", id);
+    }
+
+
+    public Doctor findById(Long id) {
+        try {
+            return db.queryForObject("select * from doctor where id = ?", this::map, id);
+        } catch (EmptyResultDataAccessException e) {
+            throw new NotFound(Doctor.class, id);
+        }
+
+    }
+
+
 }
 
-// Object... args
-// var args vuol dire che Object e' un array e quindi numero parametri variabile

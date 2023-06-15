@@ -1,4 +1,4 @@
-package it.intesys.codylab.rookie.api;
+package org.example.domain;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
