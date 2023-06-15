@@ -1,4 +1,4 @@
-package rookie.mappper;
+package rookie.mapper;
 
 import org.springframework.stereotype.Component;
 import rookie.domain.Doctor;

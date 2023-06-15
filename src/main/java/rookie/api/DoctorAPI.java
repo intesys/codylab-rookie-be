@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import rookie.dto.DoctorDTO;
 import org.springframework.http.ResponseEntity;
 import rookie.dto.DoctorFIlterDTO;
+import rookie.exeptions.NotFound;
 import rookie.service.DoctorService;
 
 import java.util.List;
@@ -26,7 +27,55 @@ public class DoctorAPI {
         return ResponseEntity.ok(doctorDTOS);
     }
 
-    private Pageable pageable(Integer pageIndex, Integer size, String sort) {
-        return PageRequest.of(pageIndex,size, Sort.unsorted());
+    @GetMapping("/api/doctor/{id}")
+    ResponseEntity<DoctorDTO> getDoctor (@PathVariable Long id) {
+        try {
+            DoctorDTO dto = doctorService.getDoctor(id);
+            return ResponseEntity.ok(dto);
+        } catch (NotFound e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @PutMapping("/api/doctor/{id}")
+    ResponseEntity<Void> updateDoctor (@PathVariable Long id, @RequestBody DoctorDTO doctorDTO) {
+        try {
+            doctorDTO.setId(id);
+            doctorService.updateDoctor (doctorDTO);
+            return ResponseEntity.ok().build();
+        } catch (NotFound e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @DeleteMapping("/api/doctor/{id}")
+    ResponseEntity<Void> deleteDoctor (@PathVariable Long id) {
+        try {
+            doctorService.deleteDoctor (id);
+            return ResponseEntity.ok().build();
+        } catch (NotFound e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    private Pageable pageable(Integer page, Integer size, String sort) {
+        if (sort != null && !sort.isBlank()) {
+            Sort.Order order;
+            String[] sortSplit = sort.split(",");
+            String field = sortSplit[0];
+            String direction = sortSplit[1];
+
+            if (sortSplit.length == 2) {
+                order = new Sort.Order(Sort.Direction.fromString(direction), field);
+            } else {
+                order = Sort.Order.by(field);
+            }
+            return PageRequest.of(page, size, Sort.by(order));
+        } else {
+            return PageRequest.of(page, size);
+        }
     }
 }
+
+
+

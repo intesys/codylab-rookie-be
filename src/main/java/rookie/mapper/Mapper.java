@@ -1,7 +1,4 @@
-package rookie.mappper;
-
-import rookie.domain.Doctor;
-import rookie.dto.DoctorDTO;
+package rookie.mapper;
 
 public interface Mapper<ENTITY,DTO>{
     ENTITY toEntity(DTO doctorDTO);

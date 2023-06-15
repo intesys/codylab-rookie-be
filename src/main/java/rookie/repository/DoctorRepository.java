@@ -1,11 +1,13 @@
 package rookie.repository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import rookie.domain.Doctor;
+import rookie.exeptions.NotFound;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -15,22 +17,42 @@ import java.util.List;
 @Repository
 public class DoctorRepository {
     @Autowired
-    JdbcTemplate db;
-    public void save(Doctor doctor) {
-        Long id=db.queryForObject("select nextval('id_generator')",long.class);
-        db.update("insert into doctor (id, name, surname, phone_number, address, email, avatar, profession)"+
-                        "values(?, ?, ?, ?, ?, ?, ?, ?)",
-                        id,
-                        doctor.getName(),
-                        doctor.getSurname(),
-                        doctor.getPhoneNumber(),
-                        doctor.getAddress(),
-                        doctor.getEmail(),
-                        doctor.getAvatar(),
-                        doctor.getProfession());
-
-        doctor.setId(id);
+    private JdbcTemplate db;
+    public void save(Doctor doctor) throws NotFound {
+        Long id = doctor.getId();
+        if (id == null) {
+            create(doctor);
+        } else {
+            update(doctor, id);
         }
+    }
+    private void update(Doctor doctor, Long id) {
+        findById(id);
+        db.update("update doctor set name = ?, surname = ?, phone_number = ?, address = ?, email = ?, avatar = ?, profession = ? " +
+                        "where id = ?",
+                doctor.getName(),
+                doctor.getSurname(),
+                doctor.getPhoneNumber(),
+                doctor.getAddress(),
+                doctor.getEmail(),
+                doctor.getAvatar(),
+                doctor.getProfession(),
+                id);
+    }
+    private void create(Doctor doctor) {
+        Long id = db.queryForObject("select nextval ('id_generator')", Long.class);
+        db.update("insert into doctor (id, name, surname, phone_number, address, email, avatar, profession)" +
+                        "values (?, ?, ?, ?, ?, ?, ?, ?)",
+                id,
+                doctor.getName(),
+                doctor.getSurname(),
+                doctor.getPhoneNumber(),
+                doctor.getAddress(),
+                doctor.getEmail(),
+                doctor.getAvatar(),
+                doctor.getProfession());
+        doctor.setId(id);
+    }
 
     public List<Doctor> getDoctors(Pageable pageable, String name, String surname, String profession) {
         StringBuilder buffer = new StringBuilder("select * from doctor ");
@@ -54,12 +76,7 @@ public class DoctorRepository {
             whereOrAnd=and;
             parameterList.add(profession);
         }
-
-
         String query = page(buffer, pageable);
-
-
-
         Object[] parameters= parameterList.toArray();
         return db.query(query, this::map, parameters);
     }
@@ -119,5 +136,16 @@ public class DoctorRepository {
             doctor.setProfession(profession);
 
         return doctor;
+    }
+    public Doctor findById(Long id) {
+        try {
+            return db.queryForObject("select * from doctor where id = ?", this::map, id);
+        } catch (EmptyResultDataAccessException e) {
+            throw new NotFound(Doctor.class, id);
+        }
+    }
+    public void remove(Long id)  throws NotFound {
+        findById(id);
+        db.update("delete from doctor where id = ?", id);
     }
 }
