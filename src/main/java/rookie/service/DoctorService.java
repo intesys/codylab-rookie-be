@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import rookie.domain.Doctor;
 import rookie.dto.DoctorDTO;
 import rookie.dto.DoctorFilterDTO;
+import rookie.exceptions.NotFound;
 import rookie.mapper.DoctorMapper;
 import rookie.repository.DoctorRepository;
 
@@ -27,5 +28,24 @@ public class DoctorService {
     public List<DoctorDTO> getListDoctor(Pageable pageable, DoctorFilterDTO filter) {
         List<Doctor> doctors = doctorRepository.getDoctors(pageable, filter.getName(), filter.getSurname(), filter.getProfession());
         return doctors.stream().map(mapper::toDTO).toList();
+    }
+
+    private Doctor save(DoctorDTO doctorDTO) {
+        Doctor doctor = mapper.toEntity (doctorDTO);
+        doctorRepository.save(doctor);
+        return doctor;
+    }
+
+    public DoctorDTO getDoctor(Long id) throws NotFound {
+        Doctor doctor = doctorRepository.findById(id);
+        return mapper.toDTO(doctor);
+    }
+
+    public void updateDoctor(DoctorDTO doctorDTO) throws NotFound {
+        save(doctorDTO);
+    }
+
+    public void deleteDoctor(Long id) throws NotFound {
+        doctorRepository.remove(id);
     }
 }
