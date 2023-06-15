@@ -1,24 +1,13 @@
 package org.example.domain;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-
 public class Doctor {
-
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private Long id;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String name;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String surname;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String phoneNumber;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String address;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String email;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String avatar;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String profession;
 
     public Long getId() {

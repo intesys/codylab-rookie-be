@@ -1,8 +1,7 @@
 package it.intesys.codylab.rookie.api;
 
 
-import org.example.domain.Doctor;
-import org.example.dto.DoctorDTO;
+import it.intesys.codylab.rookie.dto.DoctorDTO;
 import org.springframework.stereotype.Component;
 
 @Component
