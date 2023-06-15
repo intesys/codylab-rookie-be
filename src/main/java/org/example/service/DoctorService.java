@@ -32,6 +32,11 @@ public class DoctorService {
                 .map(mapper::toDTO)
                 .toList();
     }
+
+    public DoctorDTO getDoctor(Long id) {
+        Doctor doctor = doctorRepository.findByID(id);
+        return mapper.toDTO(doctor);
+    }
 }
 
 //:: mi permettono di recuperare metodo (clausure penso)

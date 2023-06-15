@@ -112,6 +112,10 @@ public class DoctorRepository {
             doctor.setProfession(profession);
         return doctor;
     }
+
+    public Doctor findByID(Long id) {
+        return db.queryForObject("select * from doctor where id=?", this::map, id);
+    }
 }
 
 // Object... args

@@ -29,8 +29,30 @@ public class DoctorApi {
         return ResponseEntity.ok(doctorDTOs);
     }
 
-    private Pageable pageable(Integer pageIndex, Integer size, String sort) {
-        return PageRequest.of(pageIndex, size, Sort.unsorted());
+    @GetMapping("/api/doctor/{id}")
+    ResponseEntity<DoctorDTO> getDoctor (@PathVariable Long id){
+        DoctorDTO dto = doctorService.getDoctor(id);
+        return ResponseEntity.ok(dto);
+    }
+
+
+    private Pageable pageable(Integer page, Integer size, String sort) {
+        if (sort != null && !sort.isBlank()) {
+            Sort.Order order;
+            String[] sortSplit = sort.split(",");
+            String valueField = sortSplit[0];
+            String sortingField = sortSplit[1];
+
+            if (sortSplit.length == 2) {
+                order = new Sort.Order(Sort.Direction.fromString(sortingField), valueField);
+            } else {
+                order = Sort.Order.by(sortSplit[0]);
+            }
+
+            return PageRequest.of(page, size, Sort.by(order));
+        } else {
+            return PageRequest.of(page, size);
+        }
     }
 
 
