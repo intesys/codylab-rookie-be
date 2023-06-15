@@ -21,31 +21,39 @@ public class DoctorRepository {
     public void save(Doctor doctor) throws NotFound {
         Long id = doctor.getId();
         if (id == null) {
-            id = db.queryForObject("select nextval ('id_generator')", Long.class);
-            db.update("insert into doctor (id, name, surname, phone_number, address, email, avatar, profession)" +
-                    "values (?, ?, ?, ?, ?, ?, ?, ?)",
-                    id,
-                    doctor.getName(),
-                    doctor.getSurname(),
-                    doctor.getPhoneNumber(),
-                    doctor.getAddress(),
-                    doctor.getEmail(),
-                    doctor.getAvatar(),
-                    doctor.getProfession());
-            doctor.setId(id);
+            create(doctor);
         } else {
-            findById(id);
-            db.update("update doctor set name = ?, surname = ?, phone_number = ?, address = ?, email = ?, avatar = ?, profession = ? " +
-                            "where id = ?",
-                    doctor.getName(),
-                    doctor.getSurname(),
-                    doctor.getPhoneNumber(),
-                    doctor.getAddress(),
-                    doctor.getEmail(),
-                    doctor.getAvatar(),
-                    doctor.getProfession(),
-                    id);
+            update(doctor, id);
         }
+    }
+
+    private void update(Doctor doctor, Long id) {
+        findById(id);
+        db.update("update doctor set name = ?, surname = ?, phone_number = ?, address = ?, email = ?, avatar = ?, profession = ? " +
+                        "where id = ?",
+                doctor.getName(),
+                doctor.getSurname(),
+                doctor.getPhoneNumber(),
+                doctor.getAddress(),
+                doctor.getEmail(),
+                doctor.getAvatar(),
+                doctor.getProfession(),
+                id);
+    }
+
+    private void create(Doctor doctor) {
+        Long id = db.queryForObject("select nextval ('id_generator')", Long.class);
+        db.update("insert into doctor (id, name, surname, phone_number, address, email, avatar, profession)" +
+                "values (?, ?, ?, ?, ?, ?, ?, ?)",
+                id,
+                doctor.getName(),
+                doctor.getSurname(),
+                doctor.getPhoneNumber(),
+                doctor.getAddress(),
+                doctor.getEmail(),
+                doctor.getAvatar(),
+                doctor.getProfession());
+        doctor.setId(id);
     }
 
     public List<Doctor> getDoctors(Pageable pageable, String name, String surname, String profession) {
