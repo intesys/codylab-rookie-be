@@ -53,7 +53,7 @@ public class DoctorAPI {
 
     }
 
-    @DeleteMapping
+    @DeleteMapping(API_DOCTOR_ID)
     ResponseEntity<Void> deleteDoctor(@PathVariable Long id){
         try{
             doctorService.deleteDoctor(id);

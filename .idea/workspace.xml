@@ -4,12 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="966e6814-a107-4187-a0e0-64acc19dbcbe" name="Changes" comment="Creazione DoctorFilterDTO">
+    <list default="true" id="966e6814-a107-4187-a0e0-64acc19dbcbe" name="Changes" comment="Flyway, sql, getDoctor, updateDoctor, deleteDoctor">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rookie/api/DoctorAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rookie/api/DoctorAPI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rookie/repository/DoctorRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rookie/repository/DoctorRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rookie/service/DoctorService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rookie/service/DoctorService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -151,7 +147,14 @@
       <option name="project" value="LOCAL" />
       <updated>1686748050915</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Flyway, sql, getDoctor, updateDoctor, deleteDoctor">
+      <created>1686832768247</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1686832768247</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -196,6 +199,7 @@
     <MESSAGE value="Creazione dottore" />
     <MESSAGE value="Creazione Doctor, DoctorService, DoctorMapper, DoctorRepository, Mapper" />
     <MESSAGE value="Creazione DoctorFilterDTO" />
-    <option name="LAST_COMMIT_MESSAGE" value="Creazione DoctorFilterDTO" />
+    <MESSAGE value="Flyway, sql, getDoctor, updateDoctor, deleteDoctor" />
+    <option name="LAST_COMMIT_MESSAGE" value="Flyway, sql, getDoctor, updateDoctor, deleteDoctor" />
   </component>
 </project>
