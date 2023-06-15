@@ -12,16 +12,19 @@ import java.util.List;
 
 @RestController
 public class DoctorApi {
+    public static final String API_DOCTOR_ID = "/api/doctor/{id}";
+    public static final String API_DOCTOR = "/api/doctor";
+    public static final String API_DOCTOR_FILTER = "/api/doctor/filter";
     @Autowired
     private DoctorService doctorService;
 
-    @PostMapping ("/api/doctor")
+    @PostMapping (API_DOCTOR)
     ResponseEntity<DoctorDTO> createDoctor (@RequestBody DoctorDTO doctorDTO) {
         doctorDTO = doctorService.createDoctor(doctorDTO);
         return ResponseEntity.ok(doctorDTO);
     }
 
-    @PostMapping ("/api/doctor/filter")
+    @PostMapping (API_DOCTOR_FILTER)
     ResponseEntity<List<DoctorDTO>> getListDoctor (@RequestParam("page") Integer pageIndex, @RequestParam("size") Integer size, @RequestParam ("sort") String sort, @RequestBody DoctorFilterDTO filter) {
         Pageable pageable = pageable (pageIndex, size, sort);
 
@@ -29,10 +32,16 @@ public class DoctorApi {
         return ResponseEntity.ok(doctorDTOs);
     }
 
-    @GetMapping("/api/doctor/{id}")
+    @GetMapping(API_DOCTOR_ID)
     ResponseEntity<DoctorDTO> getDoctor (@PathVariable Long id) {
         DoctorDTO dto = doctorService.getDoctor (id);
         return ResponseEntity.ok(dto);
+    }
+
+    @PutMapping(API_DOCTOR_ID)
+    void updateDoctor (@PathVariable Long id, @RequestBody DoctorDTO doctorDTO) {
+        doctorDTO.setId(id);
+        doctorService.updateDoctor (doctorDTO);
     }
 
 

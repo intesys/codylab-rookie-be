@@ -17,18 +17,32 @@ public class DoctorRepository {
     @Autowired
     private JdbcTemplate db;
     public void save(Doctor doctor) {
-        Long id = db.queryForObject("select nextval ('id_generator')", Long.class);
-        db.update("insert into doctor (id, name, surname, phone_number, address, email, avatar, profession)" +
-                "values (?, ?, ?, ?, ?, ?, ?, ?)",
-                id,
-                doctor.getName(),
-                doctor.getSurname(),
-                doctor.getPhoneNumber(),
-                doctor.getAddress(),
-                doctor.getEmail(),
-                doctor.getAvatar(),
-                doctor.getProfession());
-        doctor.setId(id);
+        Long id = doctor.getId();
+        if (id == null) {
+            id = db.queryForObject("select nextval ('id_generator')", Long.class);
+            db.update("insert into doctor (id, name, surname, phone_number, address, email, avatar, profession)" +
+                    "values (?, ?, ?, ?, ?, ?, ?, ?)",
+                    id,
+                    doctor.getName(),
+                    doctor.getSurname(),
+                    doctor.getPhoneNumber(),
+                    doctor.getAddress(),
+                    doctor.getEmail(),
+                    doctor.getAvatar(),
+                    doctor.getProfession());
+            doctor.setId(id);
+        } else {
+            db.update("update doctor set name = ?, surname = ?, phone_number = ?, address = ?, email = ?, avatar = ?, profession = ? " +
+                            "where id = ?",
+                    doctor.getName(),
+                    doctor.getSurname(),
+                    doctor.getPhoneNumber(),
+                    doctor.getAddress(),
+                    doctor.getEmail(),
+                    doctor.getAvatar(),
+                    doctor.getProfession(),
+                    id);
+        }
     }
 
     public List<Doctor> getDoctors(Pageable pageable, String name, String surname, String profession) {

@@ -18,9 +18,14 @@ public class DoctorService {
     @Autowired
     private DoctorMapper mapper;
     public DoctorDTO createDoctor(DoctorDTO doctorDTO) {
+        Doctor doctor = save(doctorDTO);
+        return mapper.toDTO (doctor);
+    }
+
+    private Doctor save(DoctorDTO doctorDTO) {
         Doctor doctor = mapper.toEntity (doctorDTO);
         doctorRepository.save (doctor);
-        return mapper.toDTO (doctor);
+        return doctor;
     }
 
     public List<DoctorDTO> getListDoctor(Pageable pageable, DoctorFilterDTO filter) {
@@ -33,5 +38,9 @@ public class DoctorService {
     public DoctorDTO getDoctor(Long id) {
         Doctor doctor = doctorRepository.findById (id);
         return mapper.toDTO(doctor);
+    }
+
+    public void updateDoctor(DoctorDTO doctorDTO) {
+        save(doctorDTO);
     }
 }
