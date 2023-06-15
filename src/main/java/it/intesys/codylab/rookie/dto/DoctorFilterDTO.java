@@ -1,14 +1,9 @@
-package org.example.dto;
+package it.intesys.codylab.rookie.dto;
 
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-
-public class DoctorDTO{
+public class DoctorFilterDTO {
     private String name;
     private String surname;
-
-
+    private String profession;
 
     public String getName() {
         return name;
@@ -24,5 +19,13 @@ public class DoctorDTO{
 
     public void setSurname(String surname) {
         this.surname = surname;
+    }
+
+    public String getProfession() {
+        return profession;
+    }
+
+    public void setProfession(String profession) {
+        this.profession = profession;
     }
 }
