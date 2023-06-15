@@ -29,4 +29,9 @@ public class DoctorService {
             .map(mapper::toDTO)
             .toList();
     }
+
+    public DoctorDTO getDoctor(Long id) {
+        Doctor doctor = doctorRepository.findById (id);
+        return mapper.toDTO(doctor);
+    }
 }

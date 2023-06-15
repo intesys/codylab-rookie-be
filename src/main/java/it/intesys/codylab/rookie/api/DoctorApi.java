@@ -29,6 +29,13 @@ public class DoctorApi {
         return ResponseEntity.ok(doctorDTOs);
     }
 
+    @GetMapping("/api/doctor/{id}")
+    ResponseEntity<DoctorDTO> getDoctor (@PathVariable Long id) {
+        DoctorDTO dto = doctorService.getDoctor (id);
+        return ResponseEntity.ok(dto);
+    }
+
+
     /*
         campo
         campo,direzione
