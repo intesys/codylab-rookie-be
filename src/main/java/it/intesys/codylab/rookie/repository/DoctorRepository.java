@@ -1,7 +1,9 @@
 package it.intesys.codylab.rookie.repository;
 
 import it.intesys.codylab.rookie.domain.Doctor;
+import it.intesys.codylab.rookie.exceptions.NotFound;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -16,7 +18,7 @@ import java.util.List;
 public class DoctorRepository {
     @Autowired
     private JdbcTemplate db;
-    public void save(Doctor doctor) {
+    public void save(Doctor doctor) throws NotFound {
         Long id = doctor.getId();
         if (id == null) {
             id = db.queryForObject("select nextval ('id_generator')", Long.class);
@@ -32,6 +34,7 @@ public class DoctorRepository {
                     doctor.getProfession());
             doctor.setId(id);
         } else {
+            findById(id);
             db.update("update doctor set name = ?, surname = ?, phone_number = ?, address = ?, email = ?, avatar = ?, profession = ? " +
                             "where id = ?",
                     doctor.getName(),
@@ -126,7 +129,16 @@ public class DoctorRepository {
         return doctor;
     }
 
-    public Doctor findById(Long id) {
-        return db.queryForObject ("select * from doctor where id = ?", this::map, id);
+    public Doctor findById(Long id) throws NotFound {
+        try {
+            return db.queryForObject("select * from doctor where id = ?", this::map, id);
+        } catch (EmptyResultDataAccessException e) {
+            throw new NotFound(Doctor.class, id);
+        }
+    }
+
+    public void remove(Long id)  throws NotFound {
+        findById(id);
+        db.update("delete from doctor where id = ?", id);
     }
 }

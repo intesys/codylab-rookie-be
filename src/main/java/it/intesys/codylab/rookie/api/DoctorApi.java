@@ -2,6 +2,7 @@ package it.intesys.codylab.rookie.api;
 
 import it.intesys.codylab.rookie.dto.DoctorDTO;
 import it.intesys.codylab.rookie.dto.DoctorFilterDTO;
+import it.intesys.codylab.rookie.exceptions.NotFound;
 import it.intesys.codylab.rookie.service.DoctorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
@@ -34,14 +35,33 @@ public class DoctorApi {
 
     @GetMapping(API_DOCTOR_ID)
     ResponseEntity<DoctorDTO> getDoctor (@PathVariable Long id) {
-        DoctorDTO dto = doctorService.getDoctor (id);
-        return ResponseEntity.ok(dto);
+        try {
+            DoctorDTO dto = doctorService.getDoctor(id);
+            return ResponseEntity.ok(dto);
+        } catch (NotFound e) {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @PutMapping(API_DOCTOR_ID)
-    void updateDoctor (@PathVariable Long id, @RequestBody DoctorDTO doctorDTO) {
-        doctorDTO.setId(id);
-        doctorService.updateDoctor (doctorDTO);
+    ResponseEntity<Void> updateDoctor (@PathVariable Long id, @RequestBody DoctorDTO doctorDTO) {
+        try {
+            doctorDTO.setId(id);
+            doctorService.updateDoctor (doctorDTO);
+            return ResponseEntity.ok().build();
+        } catch (NotFound e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @DeleteMapping(API_DOCTOR_ID)
+    ResponseEntity<Void> deleteDoctor (@PathVariable Long id) {
+        try {
+            doctorService.deleteDoctor (id);
+            return ResponseEntity.ok().build();
+        } catch (NotFound e) {
+            return ResponseEntity.notFound().build();
+        }
     }
 
 
