@@ -6,11 +6,9 @@ import it.intesys.codylab.rookie.dto.DoctorFilterDTO;
 import it.intesys.codylab.rookie.exceptions.NotFound;
 import it.intesys.codylab.rookie.service.DoctorService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.relational.core.sql.In;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-public class DoctorApi {
+public class DoctorApi extends  RookieApi{
     public static final String API_DOCTOR_ID = "/api/doctor/{id}";
     public static final String API_DOCTOR_FILTER = "/api/doctor/filter";
     public static final String API_DOCTOR = "api/doctor";
@@ -69,8 +67,8 @@ public class DoctorApi {
 
 
     //campo direzione
-    private Pageable pageable(Integer pageIndex, Integer size, String sort){
-        Sort.by(List.of (new Sort.Order(Sort.Direction.ASC, "pippo")));
+    public PageRequest pageable(Integer pageIndex, Integer size, String sort){
+        //Sort.by(List.of (new Sort.Order(Sort.Direction.ASC, "pippo")));
 
         if(sort!=null && !sort.isBlank()){
             Sort.Order order;

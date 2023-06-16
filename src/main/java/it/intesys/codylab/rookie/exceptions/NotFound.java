@@ -2,7 +2,7 @@ package it.intesys.codylab.rookie.exceptions;
 
 import it.intesys.codylab.rookie.domain.Doctor;
 
-public class NotFound extends Throwable {
+public class NotFound extends RuntimeException {
     private Class<?> type;
     private  Object id;
     public NotFound(Class<?> type, Object id) {
