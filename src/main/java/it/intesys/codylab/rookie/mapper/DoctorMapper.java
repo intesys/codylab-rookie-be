@@ -5,7 +5,7 @@ import it.intesys.codylab.rookie.dto.DoctorDTO;
 import org.springframework.stereotype.Component;
 
 @Component
-public class DoctorMapper implements Mapper<Doctor, DoctorDTO> {
+public class DoctorMapper implements RookieMapper<Doctor, DoctorDTO> {
     @Override
     public Doctor toEntity(DoctorDTO dto) {
         Doctor entity = new Doctor();

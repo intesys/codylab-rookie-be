@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-public class DoctorApi {
+public class DoctorApi extends RookieApi {
     public static final String API_DOCTOR_ID = "/api/doctor/{id}";
     public static final String API_DOCTOR = "/api/doctor";
     public static final String API_DOCTOR_FILTER = "/api/doctor/filter";
@@ -63,30 +63,4 @@ public class DoctorApi {
             return ResponseEntity.notFound().build();
         }
     }
-
-
-    /*
-        campo
-        campo,direzione
-     */
-    private Pageable pageable(Integer page, Integer size, String sort) {
-        if (sort != null && !sort.isBlank()) {
-            Sort.Order order;
-            String[] sortSplit = sort.split(",");
-            String field = sortSplit[0];
-            String direction = sortSplit[1];
-
-            if (sortSplit.length == 2) {
-                order = new Sort.Order(Sort.Direction.fromString(direction), field);
-            } else {
-                order = Sort.Order.by(field);
-            }
-
-            return PageRequest.of(page, size, Sort.by(order));
-        } else {
-            return PageRequest.of(page, size);
-        }
-    }
-
-
 }
