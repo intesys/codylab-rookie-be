@@ -5,7 +5,6 @@ import org.example.exceptions.NotFound;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -16,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class DoctorRepository {
+public class DoctorRepository extends RookieRepository {
     @Autowired
     private JdbcTemplate db;
     public void save(Doctor doctor) throws NotFound {
@@ -86,27 +85,6 @@ public class DoctorRepository {
 
         Object[] parameters = parameterList.toArray();
         return db.query(query, this::map, parameters);
-    }
-
-    private String page(StringBuilder buffer, Pageable pageable) {
-        Sort sort = pageable.getSort();
-        buffer.append(' ');
-        if (!sort.isEmpty()) {
-            buffer.append("order by ");
-            sort.stream()
-                    .forEach(order -> {
-                        String property = order.getProperty();
-                        Sort.Direction direction = order.getDirection();
-                        buffer.append(property);
-                        if (direction == Sort.Direction.DESC)
-                            buffer.append(' ').append("desc").append(' ');
-                    });
-        }
-        int limit = pageable.getPageSize();
-        long offset = pageable.getOffset();
-        buffer.append("limit").append(' ').append(limit).append(' ')
-                .append("offset").append(' ').append(offset).append(' ');
-        return buffer.toString();
     }
 
     private Doctor map(ResultSet resultSet, int i) throws SQLException {

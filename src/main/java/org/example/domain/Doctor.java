@@ -1,5 +1,9 @@
 package org.example.domain;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
+import java.util.Objects;
+
 public class Doctor {
     private Long id;
     private String name;
@@ -74,4 +78,16 @@ public class Doctor {
         this.profession = profession;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Doctor doctor = (Doctor) o;
+        return id.equals(doctor.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 }
