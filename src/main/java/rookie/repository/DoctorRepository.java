@@ -15,10 +15,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class DoctorRepository {
+public class DoctorRepository extends RookieRepository{
     @Autowired
     private JdbcTemplate db;
-    public void save(Doctor doctor){
+    public void save(Doctor doctor) throws NotFound{
         Long id = doctor.getId();
         if(id == null){
             create(doctor);
@@ -120,26 +120,6 @@ public class DoctorRepository {
             doctor.setProfession(profession);
         }
         return doctor;
-    }
-
-    private String page(StringBuilder buffer, Pageable pageable){
-        int limit = pageable.getPageSize();
-        long offset = pageable.getOffset();
-        Sort sort = pageable.getSort();
-        buffer.append(' ');
-        if (!sort.isEmpty()) {
-            buffer.append("order by ");
-            sort.stream()
-                    .forEach(order -> {
-                        String property = order.getProperty();
-                        Sort.Direction direction = order.getDirection();
-                        buffer.append(property);
-                        if (direction == Sort.Direction.DESC)
-                            buffer.append(' ').append("desc").append(' ');
-                    });
-        }
-        buffer.append("limit").append(' ').append(limit).append(' ').append("offset").append(' ').append(offset).append(' ');
-        return buffer.toString();
     }
 
     public Doctor findById(Long id) throws NotFound {

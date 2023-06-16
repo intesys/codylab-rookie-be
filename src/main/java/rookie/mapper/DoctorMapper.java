@@ -5,7 +5,7 @@ import rookie.domain.Doctor;
 import rookie.dto.DoctorDTO;
 
 @Component
-public class DoctorMapper implements Mapper<Doctor, DoctorDTO> {
+public class DoctorMapper implements RookieMapper<Doctor, DoctorDTO> {
     @Override
     public Doctor toEntity(DoctorDTO dto){
         Doctor entity = new Doctor();

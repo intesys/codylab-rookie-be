@@ -1,12 +1,10 @@
 package rookie.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.*;
 import org.springframework.web.bind.annotation.*;
-import rookie.dto.DoctorDTO;
 import org.springframework.http.ResponseEntity;
+import rookie.dto.DoctorDTO;
 import rookie.exceptions.NotFound;
 import rookie.service.DoctorService;
 import rookie.dto.DoctorFilterDTO;
@@ -14,7 +12,7 @@ import rookie.dto.DoctorFilterDTO;
 import java.util.List;
 
 @RestController
-public class DoctorAPI {
+public class DoctorAPI extends RookieAPI{
     public static final String API_DOCTOR_ID = "api/doctor/{id}";
     public static final String API_DOCTOR_FILTER = "/api/doctor/filter";
     public static final String API_DOCTOR = "/api/doctor";
@@ -66,23 +64,6 @@ public class DoctorAPI {
         }
 
     }
-    private Pageable pageable(Integer pageIndex, Integer size, String sort) {
-        if (sort != null && !sort.isBlank()) {
-            Sort.Order order;
-            String[] sortSplit = sort.split(",");
-            String field = sortSplit[0];
-            String direction = sortSplit[1];
 
-            if (sortSplit.length == 2) {
-                order = new Sort.Order(Sort.Direction.fromString(direction), field);
-            } else {
-                order = Sort.Order.by(field);
-            }
-
-            return PageRequest.of(pageIndex, size, Sort.by(order));
-        } else {
-            return PageRequest.of(pageIndex, size);
-        }
-    }
 }
 
