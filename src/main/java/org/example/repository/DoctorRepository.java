@@ -1,7 +1,11 @@
 package org.example.repository;
 
+
+
 import org.example.domain.Doctor;
+import org.example.exception.NotFound;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -17,7 +21,30 @@ import java.util.List;
 public class DoctorRepository {
     @Autowired
     private JdbcTemplate db;
-    public void save(Doctor doctor) {
+    public void save(Doctor doctor) throws NotFound {
+        Long id = doctor.getId();
+        if (id == null) {
+            create(doctor);
+        } else {
+            update(doctor, id);
+        }
+    }
+
+    private void update(Doctor doctor, Long id) {
+        findById(id);
+        db.update("update doctor set name = ?, surname = ?, phone_number = ?, address = ?, email = ?, avatar = ?, profession = ? " +
+                        "where id = ?",
+                doctor.getName(),
+                doctor.getSurname(),
+                doctor.getPhoneNumber(),
+                doctor.getAddress(),
+                doctor.getEmail(),
+                doctor.getAvatar(),
+                doctor.getProfession(),
+                id);
+    }
+
+    private void create(Doctor doctor) {
         Long id = db.queryForObject("select nextval ('id_generator')", Long.class);
         db.update("insert into doctor (id, name, surname, phone_number, address, email, avatar, profession)" +
                         "values (?, ?, ?, ?, ?, ?, ?, ?)",
@@ -112,7 +139,17 @@ public class DoctorRepository {
             doctor.setProfession(profession);
         return doctor;
     }
-}
 
-// Object... args
-// var args vuol dire che Object e' un array e quindi numero parametri variabile
+    public Doctor findById(Long id) throws NotFound {
+        try {
+            return db.queryForObject("select * from doctor where id = ?", this::map, id);
+        } catch (EmptyResultDataAccessException e) {
+            throw new NotFound(Doctor.class, id);
+        }
+    }
+
+    public void remove(Long id)  throws NotFound {
+        findById(id);
+        db.update("delete from doctor where id = ?", id);
+    }
+}

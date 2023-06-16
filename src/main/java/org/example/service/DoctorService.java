@@ -3,6 +3,7 @@ package org.example.service;
 import org.example.domain.Doctor;
 import org.example.dto.DoctorDTO;
 import org.example.dto.DoctorFilterDTO;
+import org.example.exception.NotFound;
 import org.example.mapper.DoctorMapper;
 import org.example.repository.DoctorRepository;
 
@@ -11,6 +12,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 
 import java.util.List;
 
@@ -21,9 +25,14 @@ public class DoctorService {
     @Autowired
     private DoctorMapper mapper;
     public DoctorDTO createDoctor(DoctorDTO doctorDTO) {
+        Doctor doctor = save(doctorDTO);
+        return mapper.toDTO (doctor);
+    }
+
+    private Doctor save(DoctorDTO doctorDTO) {
         Doctor doctor = mapper.toEntity (doctorDTO);
         doctorRepository.save (doctor);
-        return mapper.toDTO (doctor);
+        return doctor;
     }
 
     public List<DoctorDTO> getListDoctor(Pageable pageable, DoctorFilterDTO filter) {
@@ -32,6 +41,17 @@ public class DoctorService {
                 .map(mapper::toDTO)
                 .toList();
     }
-}
 
-//:: mi permettono di recuperare metodo (clausure penso)
+    public DoctorDTO getDoctor(Long id) throws NotFound {
+        Doctor doctor = doctorRepository.findById (id);
+        return mapper.toDTO(doctor);
+    }
+
+    public void updateDoctor(DoctorDTO doctorDTO)  throws NotFound {
+        save(doctorDTO);
+    }
+
+    public void deleteDoctor(Long id)  throws NotFound {
+        doctorRepository.remove (id);
+    }
+}
