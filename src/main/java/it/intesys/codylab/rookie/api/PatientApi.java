@@ -5,16 +5,14 @@ import it.intesys.codylab.rookie.dto.PatientFilterDTO;
 import it.intesys.codylab.rookie.exceptions.NotFound;
 import it.intesys.codylab.rookie.service.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-public class PatientApi extends RookieApi{
+public class PatientApi extends RookieApi {
     public static final String API_PATIENT_ID = "/api/patient/{id}";
     public static final String API_PATIENT = "/api/patient";
     public static final String API_PATIENT_FILTER = "/api/patient/filter";
@@ -22,14 +20,14 @@ public class PatientApi extends RookieApi{
     private PatientService patientService;
 
     @PostMapping (API_PATIENT)
-    ResponseEntity<PatientDTO> createPatient (@RequestBody PatientDTO patientDTO) throws NotFound {
+    ResponseEntity<PatientDTO> createPatient (@RequestBody PatientDTO patientDTO) {
         patientDTO = patientService.createPatient(patientDTO);
         return ResponseEntity.ok(patientDTO);
     }
 
     @PostMapping (API_PATIENT_FILTER)
     ResponseEntity<List<PatientDTO>> getListPatient (@RequestParam("page") Integer pageIndex, @RequestParam("size") Integer size, @RequestParam ("sort") String sort, @RequestBody PatientFilterDTO filter) {
-        Pageable pageable = (Pageable) pageable (pageIndex, size, sort);
+        Pageable pageable = pageable (pageIndex, size, sort);
 
         List<PatientDTO> patientDTOs = patientService.getListPatient (pageable, filter);
         return ResponseEntity.ok(patientDTOs);
@@ -65,5 +63,6 @@ public class PatientApi extends RookieApi{
             return ResponseEntity.notFound().build();
         }
     }
+
 
 }

@@ -1,6 +1,7 @@
 package it.intesys.codylab.rookie.dto;
 
 import java.time.Instant;
+import java.util.List;
 
 public class PatientDTO {
     private Long id;
@@ -17,6 +18,7 @@ public class PatientDTO {
     private Instant lastAdmissions;
     private Long lastDoctorVisitedId;
     private  String email;
+    private List<PatientRecordDTO> patientRecords;
 
     public Long getId() {
         return id;
@@ -129,5 +131,7 @@ public class PatientDTO {
     public void setEmail(String email) {
         this.email = email;
     }
-
+    public void setPatientRecords(List<PatientRecordDTO> patientRecords) {
+        this.patientRecords = patientRecords;
+    }
 }
