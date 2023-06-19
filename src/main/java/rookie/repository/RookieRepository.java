@@ -4,6 +4,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
 public class RookieRepository {
+    public static final int LATEST_RECORD_SIZE = 5;
     protected String page(StringBuilder buffer, Pageable pageable){
         int limit = pageable.getPageSize();
         long offset = pageable.getOffset();
