@@ -44,7 +44,7 @@ public class DoctorRepository extends RookieRepository {
     private void create(Doctor doctor) {
         Long id = db.queryForObject("select nextval ('id_generator')", Long.class);
         db.update("insert into doctor (id, name, surname, phone_number, address, email, avatar, profession)" +
-                        "values (?, ?, ?, ?, ?, ?, ?, ?)",
+                "values (?, ?, ?, ?, ?, ?, ?, ?)",
                 id,
                 doctor.getName(),
                 doctor.getSurname(),

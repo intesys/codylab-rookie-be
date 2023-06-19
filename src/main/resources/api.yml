@@ -171,7 +171,7 @@ paths:
           description: OK
         "404":
           description: Not Found
-    /api/patient:
+  /api/patient:
     post:
       tags:
         - patient-api

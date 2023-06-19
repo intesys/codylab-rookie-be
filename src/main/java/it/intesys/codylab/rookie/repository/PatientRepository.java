@@ -59,21 +59,21 @@ public class PatientRepository extends RookieRepository {
         Long id = db.queryForObject("select nextval ('id_generator')", Long.class);
         db.update("insert into patient (id, address, avatar, blood_group, chronic_patient, email, idp, last_admission, " +
                         "last_doctor_visited_id, name, note, opd, phone_number, surname)" +
-                        "values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-                id,
-                patient.getAddress(),
-                patient.getAvatar(),
-                Optional.ofNullable(patient.getBloodGroup()).map(BloodGroup::name).orElse(null),
-                patient.getChronicPatient(),
-                patient.getEmail(),
-                patient.getIdp(),
-                patient.getLastAdmission(),
-                Optional.ofNullable(patient.getLastDoctorVisited()).map(Doctor::getId).orElse(null),
-                patient.getName(),
-                patient.getNote(),
-                patient.getOpd(),
-                patient.getPhoneNumber(),
-                patient.getSurname());
+                "values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+            id,
+            patient.getAddress(),
+            patient.getAvatar(),
+            Optional.ofNullable(patient.getBloodGroup()).map(BloodGroup::name).orElse(null),
+            patient.getChronicPatient(),
+            patient.getEmail(),
+            patient.getIdp(),
+            patient.getLastAdmission(),
+            Optional.ofNullable(patient.getLastDoctorVisited()).map(Doctor::getId).orElse(null),
+            patient.getName(),
+            patient.getNote(),
+            patient.getOpd(),
+            patient.getPhoneNumber(),
+            patient.getSurname());
         patient.setId(id);
     }
 

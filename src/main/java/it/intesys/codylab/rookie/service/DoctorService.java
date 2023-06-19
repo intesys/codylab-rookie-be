@@ -32,8 +32,8 @@ public class DoctorService {
     public List<DoctorDTO> getListDoctor(Pageable pageable, DoctorFilterDTO filter) {
         List<Doctor> doctors = doctorRepository.getDoctors (pageable, filter.getName(), filter.getSurname(), filter.getProfession());
         return doctors.stream()
-                .map(mapper::toDTO)
-                .toList();
+            .map(mapper::toDTO)
+            .toList();
     }
 
     public DoctorDTO getDoctor(Long id) throws NotFound {

@@ -4,6 +4,8 @@ package it.intesys.codylab.rookie.dto;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PatientDTO {
     @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -34,8 +36,10 @@ public class PatientDTO {
     private Instant lastAdmission;
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private Long lastDoctorVisitedId;
-/*
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
+    private List<PatientRecordDTO> patientRecords;
 
+/*
         patientRecords:
           type: array
           items:
@@ -157,5 +161,15 @@ public class PatientDTO {
 
     public void setLastDoctorVisitedId(Long lastDoctorVisitedId) {
         this.lastDoctorVisitedId = lastDoctorVisitedId;
+    }
+
+    public List<PatientRecordDTO> getPatientRecords() {
+        if (patientRecords == null)
+            patientRecords = new ArrayList<>();
+        return patientRecords;
+    }
+
+    public void setPatientRecords(List<PatientRecordDTO> patientRecords) {
+        this.patientRecords = patientRecords;
     }
 }
