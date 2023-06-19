@@ -5,6 +5,8 @@ import org.springframework.data.domain.Sort;
 
 public class RookieRepository {
 
+    public static final int LATEST_RECORD_SIZE = 5;
+
     protected String page(StringBuilder buffer, Pageable pageable) {
         Sort sort = pageable.getSort();
         buffer.append(' ');
@@ -14,9 +16,9 @@ public class RookieRepository {
                     .forEach(order -> {
                         String property = order.getProperty();
                         Sort.Direction direction = order.getDirection();
-                        buffer.append(property);
+                        buffer.append(property).append(' ');
                         if (direction == Sort.Direction.DESC)
-                            buffer.append(' ').append("desc").append(' ');
+                            buffer.append("desc").append(' ');
                     });
         }
         int limit = pageable.getPageSize();

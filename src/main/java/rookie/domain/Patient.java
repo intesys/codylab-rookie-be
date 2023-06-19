@@ -1,5 +1,4 @@
 package rookie.domain;
-
 import java.time.Instant;
 import java.util.HashMap;
 import java.util.Map;
@@ -146,4 +145,5 @@ public class Patient {
     public int hashCode() {
         return Objects.hash(id);
     }
+
 }

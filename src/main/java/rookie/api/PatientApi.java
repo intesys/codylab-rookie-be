@@ -1,6 +1,7 @@
 package rookie.api;
 
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +14,7 @@ import rookie.service.PatientService;
 import java.util.List;
 
 @RestController
-public class PatientAPI extends RookieAPI {
+public class PatientApi extends RookieAPI {
     @Autowired
     private PatientService patientService;
 
@@ -45,7 +46,7 @@ public class PatientAPI extends RookieAPI {
     ResponseEntity<Void> updatePatient (@PathVariable Long id, @RequestBody PatientDTO patientDTO) {
         try {
             patientDTO.setId(id);
-            patientService.updatePatient(patientDTO);
+            patientService.updatePatient (patientDTO);
             return ResponseEntity.ok().build();
         } catch (NotFound e) {
             return ResponseEntity.notFound().build();
@@ -55,7 +56,7 @@ public class PatientAPI extends RookieAPI {
     @DeleteMapping("/api/patient/{id}")
     ResponseEntity<Void> deletePatient (@PathVariable Long id) {
         try {
-            patientService.deletePatient(id);
+            patientService.deletePatient (id);
             return ResponseEntity.ok().build();
         } catch (NotFound e) {
             return ResponseEntity.notFound().build();

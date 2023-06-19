@@ -1,12 +1,14 @@
 package rookie.exeptions;
 
-public class NotFound extends RuntimeException{
+
+public class NotFound extends RuntimeException {
     final private Class<?> type;
     final private Object id;
     public NotFound(Class<?> type, Object id) {
         this.type = type;
         this.id = id;
     }
+
     public Class<?> getType() {
         return type;
     }
@@ -24,5 +26,4 @@ public class NotFound extends RuntimeException{
     public String toString() {
         return String.format("Not found %s [%s]", type.getSimpleName(), id);
     }
-
 }

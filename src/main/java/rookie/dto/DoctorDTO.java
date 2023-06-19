@@ -1,13 +1,24 @@
 package rookie.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class DoctorDTO {
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private Long id;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String name;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String surname;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String phoneNumber;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String address;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String email;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String avatar;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String profession;
 
     public Long getId() {
@@ -73,6 +84,4 @@ public class DoctorDTO {
     public void setProfession(String profession) {
         this.profession = profession;
     }
-
-
 }

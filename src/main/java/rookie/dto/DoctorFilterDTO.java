@@ -1,6 +1,5 @@
 package rookie.dto;
-
-public class DoctorFIlterDTO {
+public class DoctorFilterDTO {
     private String name;
     private String surname;
     private String profession;

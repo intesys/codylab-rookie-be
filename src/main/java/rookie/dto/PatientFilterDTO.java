@@ -1,5 +1,4 @@
 package rookie.dto;
-
 public class PatientFilterDTO {
     private String text;
     private Long id;

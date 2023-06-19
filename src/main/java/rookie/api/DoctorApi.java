@@ -2,29 +2,33 @@ package rookie.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import rookie.dto.DoctorDTO;
-import org.springframework.http.ResponseEntity;
-import rookie.dto.DoctorFIlterDTO;
+import rookie.dto.DoctorFilterDTO;
 import rookie.exeptions.NotFound;
 import rookie.service.DoctorService;
 
 import java.util.List;
 
 @RestController
-public class DoctorAPI {
+public class DoctorApi extends RookieAPI {
+
     @Autowired
     private DoctorService doctorService;
-    @PostMapping("/api/doctor")
-     ResponseEntity<DoctorDTO> createDoctor(@RequestBody DoctorDTO doctorDTO){
+
+    @PostMapping ("/api/doctor/{id}")
+    ResponseEntity<DoctorDTO> createDoctor (@RequestBody DoctorDTO doctorDTO) {
         doctorDTO = doctorService.createDoctor(doctorDTO);
         return ResponseEntity.ok(doctorDTO);
     }
-    @PostMapping("/api/doctor/filter")
-    ResponseEntity<List<DoctorDTO>> getListDoctor(@RequestParam("page") Integer pageIndex, @RequestParam("size") Integer size, @RequestParam("sort") String sort, @RequestBody DoctorFIlterDTO filter){
-        Pageable pageable=pageable(pageIndex,size,sort);
-        List<DoctorDTO> doctorDTOS = doctorService.getListDoctor(pageable, filter);
-        return ResponseEntity.ok(doctorDTOS);
+
+    @PostMapping ("/api/doctor/filter")
+    ResponseEntity<List<DoctorDTO>> getListDoctor (@RequestParam("page") Integer pageIndex, @RequestParam("size") Integer size, @RequestParam ("sort") String sort, @RequestBody DoctorFilterDTO filter) {
+        Pageable pageable = pageable (pageIndex, size, sort);
+
+        List<DoctorDTO> doctorDTOs = doctorService.getListDoctor (pageable, filter);
+        return ResponseEntity.ok(doctorDTOs);
     }
 
     @GetMapping("/api/doctor/{id}")
@@ -57,25 +61,4 @@ public class DoctorAPI {
             return ResponseEntity.notFound().build();
         }
     }
-
-    private Pageable pageable(Integer page, Integer size, String sort) {
-        if (sort != null && !sort.isBlank()) {
-            Sort.Order order;
-            String[] sortSplit = sort.split(",");
-            String field = sortSplit[0];
-            String direction = sortSplit[1];
-
-            if (sortSplit.length == 2) {
-                order = new Sort.Order(Sort.Direction.fromString(direction), field);
-            } else {
-                order = Sort.Order.by(field);
-            }
-            return PageRequest.of(page, size, Sort.by(order));
-        } else {
-            return PageRequest.of(page, size);
-        }
-    }
 }
-
-
-

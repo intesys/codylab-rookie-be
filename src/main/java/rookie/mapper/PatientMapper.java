@@ -1,5 +1,6 @@
 package rookie.mapper;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import rookie.domain.BloodGroup;
@@ -12,7 +13,7 @@ import rookie.repository.DoctorRepository;
 import java.util.Optional;
 
 @Component
-public class PatientMapper implements Mapper<Patient, PatientDTO> {
+public class PatientMapper implements RookieMapper<Patient, PatientDTO> {
     @Autowired
     private DoctorRepository doctorRepository;
 
@@ -21,10 +22,7 @@ public class PatientMapper implements Mapper<Patient, PatientDTO> {
         Patient entity = new Patient();
         entity.setAddress(dto.getAddress());
         entity.setAvatar(dto.getAvatar());
-        entity.setBloodGroup(Optional.ofNullable(dto.getBloodGroup())
-                .map(BloodGroupDTO::name)
-                .map(BloodGroup::valueOf)
-                .orElse(null));
+        entity.setBloodGroup(Optional.ofNullable(dto.getBloodGroup()).map(BloodGroupDTO::name).map(BloodGroup::valueOf).orElse(null));
         entity.setChronicPatient(dto.getChronicPatient());
         entity.setEmail(dto.getEmail());
         entity.setId(dto.getId());
@@ -35,9 +33,7 @@ public class PatientMapper implements Mapper<Patient, PatientDTO> {
         entity.setOpd(dto.getOpd());
         entity.setPhoneNumber(dto.getPhoneNumber());
         entity.setSurname(dto.getSurname());
-        Doctor lastDoctorVisited = Optional.ofNullable(dto.getLastDoctorVisitedId())
-                .map(doctorRepository::findById)
-                .orElse(null);
+        Doctor lastDoctorVisited = Optional.ofNullable(dto.getLastDoctorVisitedId()).map(doctorRepository::findById).orElse(null);
         entity.setLastDoctorVisited(lastDoctorVisited);
         return entity;
     }
@@ -47,10 +43,7 @@ public class PatientMapper implements Mapper<Patient, PatientDTO> {
         PatientDTO dto = new PatientDTO();
         dto.setAddress(entity.getAddress());
         dto.setAvatar(entity.getAvatar());
-        dto.setBloodGroup(Optional.ofNullable(entity.getBloodGroup())
-                .map(BloodGroup::name)
-                .map(BloodGroupDTO::valueOf)
-                .orElse(null));
+        dto.setBloodGroup(Optional.ofNullable(entity.getBloodGroup()).map(BloodGroup::name).map(BloodGroupDTO::valueOf).orElse(null));
         dto.setChronicPatient(entity.getChronicPatient());
         dto.setEmail(entity.getEmail());
         dto.setId(entity.getId());
@@ -61,9 +54,7 @@ public class PatientMapper implements Mapper<Patient, PatientDTO> {
         dto.setOpd(entity.getOpd());
         dto.setPhoneNumber(entity.getPhoneNumber());
         dto.setSurname(entity.getSurname());
-        Long lastDoctorVisitedId = Optional.ofNullable(entity.getLastDoctorVisited())
-                .map(Doctor::getId)
-                .orElse(null);
+        Long lastDoctorVisitedId = Optional.ofNullable(entity.getLastDoctorVisited()).map(Doctor::getId).orElse(null);
         dto.setLastDoctorVisitedId(lastDoctorVisitedId);
         return dto;
     }

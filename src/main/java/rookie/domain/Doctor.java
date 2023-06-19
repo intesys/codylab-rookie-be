@@ -1,5 +1,7 @@
 package rookie.domain;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 import java.util.Objects;
 
 public class Doctor {
@@ -75,6 +77,7 @@ public class Doctor {
     public void setProfession(String profession) {
         this.profession = profession;
     }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
