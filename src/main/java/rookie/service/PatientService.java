@@ -4,12 +4,14 @@ package rookie.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import rookie.domain.Doctor;
 import rookie.domain.Patient;
 import rookie.dto.PatientDTO;
 import rookie.dto.PatientFilterDTO;
 import rookie.exeptions.NotFound;
 import rookie.mapper.PatientMapper;
 import rookie.mapper.PatientRecordMapper;
+import rookie.repository.DoctorRepository;
 import rookie.repository.PatientRecordRepository;
 import rookie.repository.PatientRepository;
 
@@ -25,6 +27,9 @@ public class PatientService {
     private PatientMapper mapper;
     @Autowired
     private PatientRecordMapper patientRecordMapper;
+    @Autowired
+    private DoctorRepository doctorRepository;
+
     public PatientDTO createPatient(PatientDTO patientDTO) {
         Patient patient = save(patientDTO);
         return mapper.toDTO (patient);
@@ -45,21 +50,23 @@ public class PatientService {
 
     private PatientDTO toDTO(Patient patient) {
         PatientDTO patientDTO = mapper.toDTO(patient);
+
         patientDTO.setPatientRecords(patientRecordRepository.findLatestRecordByPatient (patient)
                 .stream()
                 .map(patientRecordMapper::toDTO)
                 .toList());
+
+        patientDTO.setDoctorIds(doctorRepository.findByPatient(patient)
+                .stream()
+                .map(Doctor::getId)
+                .toList());
+
         return patientDTO;
     }
 
     public PatientDTO getPatient(Long id) throws NotFound {
-        Patient patient = patientRepository.findById(id);
-        PatientDTO patientDTO = mapper.toDTO(patient);
-        patientDTO.setPatientRecords(patientRecordRepository.findByPatient (patient)
-                .stream()
-                .map(patientRecordMapper::toDTO)
-                .toList());
-        return patientDTO;
+        Patient patient = patientRepository.findById (id);
+        return toDTO(patient);
     }
 
     public void updatePatient(PatientDTO patientDTO)  throws NotFound {

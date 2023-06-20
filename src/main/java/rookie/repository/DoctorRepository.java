@@ -7,6 +7,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import rookie.domain.Doctor;
+import rookie.domain.Patient;
 import rookie.exeptions.NotFound;
 
 import java.sql.ResultSet;
@@ -127,5 +128,12 @@ public class DoctorRepository extends RookieRepository {
     public void remove(Long id)  throws NotFound {
         findById(id);
         db.update("delete from doctor where id = ?", id);
+    }
+
+    public List<Doctor> findByPatient(Patient patient) {
+        return db.query ("select * from doctor where id in (  " +
+                "select distinct doctor_id  from patient_record   " +
+                "where patient_id = ?)   " +
+                "order by surname", this::map, patient.getId());
     }
 }

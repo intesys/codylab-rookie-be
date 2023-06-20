@@ -3,7 +3,7 @@ info:
   title: Open Hospital API
   version: v0
 servers:
-  - url: http://localhost:8081
+  - url: http://localhost:8080
     description: Generated server url
 paths:
   /api/patientRecord/{id}:
@@ -59,7 +59,7 @@ paths:
       responses:
         "200":
           description: OK
-  /api/patient/{id}:
+  /api/patieFnt/{id}:
     get:
       tags:
         - patient-api

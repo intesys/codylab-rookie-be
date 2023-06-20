@@ -1,5 +1,5 @@
 server:
-    port: 8081
+    port: 8080
 
 spring:
   datasource:
@@ -8,3 +8,6 @@ spring:
     username: postgres
     password: Ale05deserto
 
+springdoc:
+  swagger-ui:
+    url: /v3/api-docs.yaml

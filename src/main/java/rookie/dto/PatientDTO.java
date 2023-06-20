@@ -38,17 +38,8 @@ public class PatientDTO {
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     private List<PatientRecordDTO> patientRecords;
 
-/*
-        patientRecords:
-          type: array
-          items:
-            $ref: '#/components/schemas/PatientRecordDTO'
-        doctorIds:
-          type: array
-          items:
-            type: integer
-            format: int64
- */
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
+    private List<Long> doctorIds;
 
     public Long getId() {
         return id;
@@ -170,5 +161,13 @@ public class PatientDTO {
 
     public void setPatientRecords(List<PatientRecordDTO> patientRecords) {
         this.patientRecords = patientRecords;
+    }
+
+    public List<Long> getDoctorIds() {
+        return doctorIds;
+    }
+
+    public void setDoctorIds(List<Long> doctorIds) {
+        this.doctorIds = doctorIds;
     }
 }

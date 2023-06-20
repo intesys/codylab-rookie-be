@@ -4,33 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="28453e8c-e06f-4a7d-8733-bb08812ce15d" name="Changes" comment="creazione paziente">
-      <change afterPath="$PROJECT_DIR$/src/main/java/rookie/api/PatientRecordApi.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/rookie/domain/PatientRecord.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/rookie/dto/PatientRecordDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/rookie/mapper/PatientRecordMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/rookie/repository/PatientRecordRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/rookie/service/PatientRecordService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/db/migration/V1.0.3__create_patient_record.sql" afterDir="false" />
+    <list default="true" id="28453e8c-e06f-4a7d-8733-bb08812ce15d" name="Changes" comment="implementazione PatientRecord">
+      <change afterPath="$PROJECT_DIR$/src/test/java/api/DoctorApiTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/api/PatientApiTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rookie/api/DoctorAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rookie/api/DoctorApi.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rookie/api/PatientAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rookie/api/PatientApi.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rookie/api/RookieAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rookie/api/RookieAPI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rookie/domain/Doctor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rookie/domain/Doctor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rookie/domain/Patient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rookie/domain/Patient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/rookie/dto/DoctorDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rookie/dto/DoctorDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rookie/dto/DoctorFIlterDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rookie/dto/DoctorFilterDTO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/rookie/dto/PatientDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rookie/dto/PatientDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rookie/dto/PatientFilterDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rookie/dto/PatientFilterDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rookie/exeptions/NotFound.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rookie/exeptions/NotFound.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rookie/mapper/DoctorMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rookie/mapper/DoctorMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rookie/mapper/Mapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rookie/mapper/RookieMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rookie/mapper/PatientMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rookie/mapper/PatientMapper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/rookie/repository/DoctorRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rookie/repository/DoctorRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rookie/repository/RookieRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rookie/repository/RookieRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rookie/repository/PatientRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rookie/repository/PatientRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/rookie/service/DoctorService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rookie/service/DoctorService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/rookie/service/PatientService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rookie/service/PatientService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/api.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/api.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -83,7 +69,7 @@
       <recent name="C:\Users\aleba\Desktop\PCTO\codylab-rookie-be\src\main\resources\db\migration" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="JUnit.DoctorApiTest">
     <configuration name="App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="rookie.App" />
       <module name="codylab-rookie-be" />
@@ -97,8 +83,24 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="DoctorApiTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="codylab-rookie-be" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="api.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="api" />
+      <option name="MAIN_CLASS_NAME" value="api.DoctorApiTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.DoctorApiTest" />
         <item itemvalue="Application.App" />
       </list>
     </recent_temporary>
@@ -140,7 +142,14 @@
       <option name="project" value="LOCAL" />
       <updated>1686928840858</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="implementazione PatientRecord">
+      <created>1687187937859</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1687187937859</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -169,7 +178,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="creazione dottore" />
     <MESSAGE value="creazione paziente" />
-    <option name="LAST_COMMIT_MESSAGE" value="creazione paziente" />
+    <MESSAGE value="implementazione PatientRecord" />
+    <option name="LAST_COMMIT_MESSAGE" value="implementazione PatientRecord" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
