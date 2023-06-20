@@ -1,18 +1,30 @@
 package org.example.dto;
 
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import org.example.domain.Patient;
+
+import java.util.List;
 
 public class DoctorDTO {
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private Long id;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String name;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String surname;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String phoneNumber;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String address;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String email;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String avatar;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String profession;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private List<PatientDTO> latestPatients;
 
     public Long getId() {
         return id;
@@ -76,5 +88,13 @@ public class DoctorDTO {
 
     public void setProfession(String profession) {
         this.profession = profession;
+    }
+
+    public List<PatientDTO> getLatestPatients() {
+        return latestPatients;
+    }
+
+    public void setLatestPatients(List<PatientDTO> latestPatients) {
+        this.latestPatients = latestPatients;
     }
 }

@@ -1,6 +1,7 @@
 package org.example.repository;
 
 import org.example.domain.Doctor;
+import org.example.domain.Patient;
 import org.example.exceptions.NotFound;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -15,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class DoctorRepository {
+public class DoctorRepository extends RookieRepository {
     @Autowired
     private JdbcTemplate db;
     public void save(Doctor doctor) throws NotFound {
@@ -87,27 +88,6 @@ public class DoctorRepository {
         return db.query(query, this::map, parameters);
     }
 
-    private String page(StringBuilder buffer, Pageable pageable) {
-        Sort sort = pageable.getSort();
-        buffer.append(' ');
-        if (!sort.isEmpty()) {
-            buffer.append("order by ");
-            sort.stream()
-                    .forEach(order -> {
-                        String property = order.getProperty();
-                        Sort.Direction direction = order.getDirection();
-                        buffer.append(property);
-                        if (direction == Sort.Direction.DESC)
-                            buffer.append(' ').append("desc").append(' ');
-                    });
-        }
-        int limit = pageable.getPageSize();
-        long offset = pageable.getOffset();
-        buffer.append("limit").append(' ').append(limit).append(' ')
-                .append("offset").append(' ').append(offset).append(' ');
-        return buffer.toString();
-    }
-
     private Doctor map(ResultSet resultSet, int i) throws SQLException {
         Doctor doctor = new Doctor();
         Long id = resultSet.getLong("id");
@@ -148,5 +128,12 @@ public class DoctorRepository {
     public void remove(Long id)  throws NotFound {
         findById(id);
         db.update("delete from doctor where id = ?", id);
+    }
+
+    public List<Doctor> findByPatient(Patient patient) {
+        return db.query ("select * from doctor where id in (  " +
+                "select distinct doctor_id  from patient_record   " +
+                "where patient_id = ?)   " +
+                "order by surname", this::map, patient.getId());
     }
 }
