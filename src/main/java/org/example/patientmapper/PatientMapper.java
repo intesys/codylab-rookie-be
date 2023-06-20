@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 import java.util.Optional;
 
 @Component
-public class PatientMapper implements PMapper<Patient, PatientDTO> {
+public class PatientMapper implements RookieMapper<Patient, PatientDTO> {
     @Autowired
     private DoctorRepository doctorRepository;
 

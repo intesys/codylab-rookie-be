@@ -5,6 +5,7 @@ package org.example.patientrepository;
 import org.springframework.data.domain.Sort;
 
     public class RookieRepository {
+        public static final int LATEST_RECORD_SIZE = 5;
 
         protected String page(StringBuilder buffer, Pageable pageable) {
             Sort sort = pageable.getSort();

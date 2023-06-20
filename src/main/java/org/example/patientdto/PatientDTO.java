@@ -2,8 +2,12 @@ package org.example.patientdto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import org.example.patientmapper.BloodGroupDTO;
+import org.example.patientmapper.PatientRecordDTO;
+
 
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PatientDTO {
     @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -34,6 +38,9 @@ public class PatientDTO {
     private Instant lastAdmission;
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private Long lastDoctorVisitedId;
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
+    private List<PatientRecordDTO> patientRecords;
+
 
 
     public Long getId() {
@@ -146,5 +153,15 @@ public class PatientDTO {
 
     public void setLastDoctorVisitedId(Long lastDoctorVisitedId) {
         this.lastDoctorVisitedId = lastDoctorVisitedId;
+    }
+
+    public List<PatientRecordDTO> getPatientRecords() {
+        if (patientRecords == null)
+            patientRecords = new ArrayList<>();
+        return patientRecords;
+    }
+
+    public void setPatientRecords(List<PatientRecordDTO> patientRecords) {
+        this.patientRecords = patientRecords;
     }
 }
