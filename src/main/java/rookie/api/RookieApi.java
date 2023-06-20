@@ -4,7 +4,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
-public class RookieAPI {
+public class RookieApi {
     protected Pageable pageable(Integer pageIndex, Integer size, String sort) {
         if (sort != null && !sort.isBlank()) {
             Sort.Order order;

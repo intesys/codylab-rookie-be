@@ -4,10 +4,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import rookie.domain.Patient;
+import rookie.domain.Doctor;
 import rookie.dto.PatientDTO;
 import rookie.dto.PatientFilterDTO;
 import rookie.exceptions.NotFound;
 import rookie.mapper.PatientMapper;
+import rookie.mapper.PatientRecordMapper;
+import rookie.repository.DoctorRepository;
+import rookie.repository.PatientRecordRepository;
 import rookie.repository.PatientRepository;
 
 import java.util.List;
@@ -16,17 +20,22 @@ public class PatientService {
     @Autowired
     private PatientRepository patientRepository;
     @Autowired
+    private PatientRecordRepository patientRecordRepository;
+    @Autowired
     private PatientMapper mapper;
+    @Autowired
+    private PatientRecordMapper patientRecordMapper;
+    @Autowired
+    private DoctorRepository doctorRepository;
 
     public PatientDTO createPatient(PatientDTO patientDTO){
-        Patient patient = mapper.toEntity(patientDTO);
-        patientRepository.save(patient);
-        return mapper.toDTO(patient);
+        Patient patient = save(patientDTO);
+        return mapper.toDTO (patient);
     }
 
     public List<PatientDTO> getListPatient(Pageable pageable, PatientFilterDTO filter) {
         List<Patient> patients = patientRepository.getPatients (pageable, filter.getText(), filter.getId(), filter.getOpd(), filter.getIdp(), filter.getDoctorId());
-        return patients.stream().map(mapper::toDTO).toList();
+        return patients.stream().map(this::toDTO).toList();
     }
 
     private Patient save(PatientDTO patientDTO) {
@@ -37,7 +46,7 @@ public class PatientService {
 
     public PatientDTO getPatient(Long id) throws NotFound {
         Patient patient = patientRepository.findById(id);
-        return mapper.toDTO(patient);
+        return toDTO(patient);
     }
 
     public void updatePatient(PatientDTO patientDTO) throws NotFound {
@@ -46,5 +55,20 @@ public class PatientService {
 
     public void deletePatient(Long id) throws NotFound {
         patientRepository.remove(id);
+    }
+    private PatientDTO toDTO(Patient patient) {
+        PatientDTO patientDTO = mapper.toDTO(patient);
+
+        patientDTO.setPatientRecords(patientRecordRepository.findLatestRecordByPatient (patient)
+                .stream()
+                .map(patientRecordMapper::toDTO)
+                .toList());
+
+        patientDTO.setDoctorIds(doctorRepository.findByPatient(patient)
+                .stream()
+                .map(Doctor::getId)
+                .toList());
+
+        return patientDTO;
     }
 }

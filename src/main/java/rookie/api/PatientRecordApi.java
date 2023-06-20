@@ -7,10 +7,8 @@ import rookie.dto.PatientRecordDTO;
 import rookie.exceptions.NotFound;
 import rookie.service.PatientRecordService;
 
-import java.util.List;
-
 @RestController
-public class PatientRecordAPI extends RookieAPI {
+public class PatientRecordApi extends RookieApi {
     public static final String API_PATIENT_RECORD_ID = "api/patientRecord/{id}";
     public static final String API_PATIENT_RECORD_FILTER = "/api/patientRecord/filter";
     public static final String API_PATIENT_RECORD = "/api/patientRecord";

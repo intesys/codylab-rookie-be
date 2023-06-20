@@ -12,7 +12,7 @@ import rookie.dto.PatientFilterDTO;
 import java.util.List;
 
 @RestController
-public class PatientAPI extends RookieAPI {
+public class PatientApi extends RookieApi {
     public static final String API_PATIENT_ID = "api/patient/{id}";
     public static final String API_PATIENT_FILTER = "/api/patient/filter";
     public static final String API_PATIENT = "/api/patient";

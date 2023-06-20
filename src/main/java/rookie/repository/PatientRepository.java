@@ -177,4 +177,17 @@ public class PatientRepository extends RookieRepository {
         findById(id);
         db.update("delete from patient where id = ?", id);
     }
+
+    public List<Patient> findLatestPatientsByDoctor(Doctor doctor) {
+        StringBuilder buffer = new StringBuilder("select patient_id from ( " +
+                "select patient_id, max (date) last_date from patient_record " +
+                "where doctor_id = ? " +
+                "group by patient_id) a " +
+                "order by last_date desc");
+        String query = page (buffer, Pageable.ofSize(LATEST_RECORD_SIZE));
+        return db.queryForList(query, Long.class, doctor.getId())
+                .stream()
+                .map(this::findById)
+                .toList();
+    }
 }

@@ -1,14 +1,17 @@
 package rookie.dto;
 
+import java.util.List;
+
 public class DoctorDTO {
-    Long id;
-    String name;
-    String surname;
-    String phoneNumber;
-    String address;
-    String email;
-    String avatar;
-    String profession;
+    private Long id;
+    private String name;
+    private String surname;
+    private String phoneNumber;
+    private String address;
+    private String email;
+    private String avatar;
+    private String profession;
+    private List<PatientDTO> latestPatients;
 
     public Long getId() {
         return id;
@@ -72,5 +75,13 @@ public class DoctorDTO {
 
     public void setProfession(String profession) {
         this.profession = profession;
+    }
+
+    public List<PatientDTO> getLatestPatients() {
+        return latestPatients;
+    }
+
+    public void setLatestPatients(List<PatientDTO> latestPatients) {
+        this.latestPatients = latestPatients;
     }
 }

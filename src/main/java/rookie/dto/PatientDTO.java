@@ -1,10 +1,9 @@
 package rookie.dto;
 
-import rookie.domain.BloodGroup;
-import rookie.domain.Doctor;
-import rookie.domain.Patient;
 
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class PatientDTO {
@@ -22,6 +21,8 @@ public class PatientDTO {
     private Boolean chronicPatient;
     private Instant lastAdmission;
     private Long lastDoctorVisitedId;
+    private List<PatientRecordDTO> patientRecords;
+    private List<Long> doctorIds;
 
     public Long getId() {
         return id;
@@ -133,5 +134,22 @@ public class PatientDTO {
 
     public void setLastDoctorVisitedId(Long lastDoctorVisitedId) {
         this.lastDoctorVisitedId = lastDoctorVisitedId;
+    }
+    public List<PatientRecordDTO> getPatientRecords() {
+        if (patientRecords == null)
+            patientRecords = new ArrayList<>();
+        return patientRecords;
+    }
+
+    public void setPatientRecords(List<PatientRecordDTO> patientRecords) {
+        this.patientRecords = patientRecords;
+    }
+
+    public List<Long> getDoctorIds() {
+        return doctorIds;
+    }
+
+    public void setDoctorIds(List<Long> doctorIds) {
+        this.doctorIds = doctorIds;
     }
 }
