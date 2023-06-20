@@ -1,5 +1,7 @@
 package it.intesys.codylab.rookie.dto;
 
+import java.util.List;
+
 public class DoctorDTO {
     private Long ID;
     private String name;
@@ -9,6 +11,16 @@ public class DoctorDTO {
     private  String address;
     private String phoneNumber;
     private String profession;
+
+    public List<PatientDTO> getLatestPatients() {
+        return latestPatients;
+    }
+
+    public void setLatestPatients(List<PatientDTO> latestPatients) {
+        this.latestPatients = latestPatients;
+    }
+
+    private List<PatientDTO> latestPatients;
 
     public String getAddress() {
         return address;

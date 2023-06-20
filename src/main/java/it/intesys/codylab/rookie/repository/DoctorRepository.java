@@ -1,6 +1,7 @@
 package it.intesys.codylab.rookie.repository;
 
 import it.intesys.codylab.rookie.domain.Doctor;
+import it.intesys.codylab.rookie.domain.Patient;
 import it.intesys.codylab.rookie.exceptions.NotFound;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Repository;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @Repository
@@ -131,5 +133,12 @@ public class DoctorRepository extends RookieRepository {
     public void remove(Long id)  throws NotFound {
         findById(id);
         db.update("delete from doctor where id = ?", id);
+    }
+
+    public List<Doctor> findByPatient(Patient patient) {
+        return db.query ("select * from doctor where id in (  " +
+                "select distinct doctor_id  from patient_record   " +
+                "where patient_id = ?)   " +
+                "order by surname", this::map, patient.getId());
     }
 }

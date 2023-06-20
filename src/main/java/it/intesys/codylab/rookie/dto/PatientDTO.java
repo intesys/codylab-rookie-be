@@ -20,6 +20,20 @@ public class PatientDTO {
     private  String email;
     private List<PatientRecordDTO> patientRecords;
 
+    public List<PatientRecordDTO> getPatientRecords() {
+        return patientRecords;
+    }
+
+    public List<Long> getDoctorIds() {
+        return doctorIds;
+    }
+
+    public void setDoctorIds(List<Long> doctorIds) {
+        this.doctorIds = doctorIds;
+    }
+
+    private List <Long> doctorIds;
+
     public Long getId() {
         return id;
     }
