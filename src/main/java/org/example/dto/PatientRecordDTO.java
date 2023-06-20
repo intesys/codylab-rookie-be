@@ -3,6 +3,7 @@ package org.example.dto;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import java.time.Instant;
+
 public class PatientRecordDTO {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private Long id;

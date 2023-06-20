@@ -2,6 +2,9 @@ package org.example.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.example.domain.Patient;
+
+import java.util.List;
 
 public class DoctorDTO {
     @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -20,6 +23,8 @@ public class DoctorDTO {
     private String avatar;
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private String profession;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private List<PatientDTO> latestPatients;
 
     public Long getId() {
         return id;
@@ -83,5 +88,13 @@ public class DoctorDTO {
 
     public void setProfession(String profession) {
         this.profession = profession;
+    }
+
+    public List<PatientDTO> getLatestPatients() {
+        return latestPatients;
+    }
+
+    public void setLatestPatients(List<PatientDTO> latestPatients) {
+        this.latestPatients = latestPatients;
     }
 }

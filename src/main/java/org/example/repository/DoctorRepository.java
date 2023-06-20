@@ -1,10 +1,12 @@
 package org.example.repository;
 
 import org.example.domain.Doctor;
+import org.example.domain.Patient;
 import org.example.exceptions.NotFound;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -127,6 +129,13 @@ public class DoctorRepository extends RookieRepository {
     public void remove(Long id)  throws NotFound {
         findById(id);
         db.update("delete from doctor where id = ?", id);
+    }
+
+    public List<Doctor> findByPatient(Patient patient) {
+        return db.query ("select * from doctor where id in (  " +
+                "select distinct doctor_id  from patient_record   " +
+                "where patient_id = ?)   " +
+                "order by surname", this::map, patient.getId());
     }
 }
 // Object... args

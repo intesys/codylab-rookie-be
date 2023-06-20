@@ -1,6 +1,9 @@
 package org.example.service;
 
+import org.example.domain.Doctor;
 import org.example.domain.PatientRecord;
+import org.example.dto.DoctorDTO;
+import org.example.dto.PatientDTO;
 import org.example.dto.PatientRecordDTO;
 import org.example.exceptions.NotFound;
 import org.example.mapper.PatientRecordMapper;
@@ -9,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class PatientRecordService {
