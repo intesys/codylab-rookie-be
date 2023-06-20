@@ -52,8 +52,8 @@ public class PatientRecordRepository extends RookieRepository {
     private void create(PatientRecord patientRecord) {
         Long id = db.queryForObject("select nextval ('id_generator')", Long.class);
         db.update("insert into patient_record (id, date, doctor_id, patient_id, reason_visit, treatment_made, type_visit)" +
-                "values (?, ?, ?, ?, ?, ?, ?)",
-            id,
+                        "values (?, ?, ?, ?, ?, ?, ?)",
+                id,
                 Optional.ofNullable(patientRecord.getDate()).map(Timestamp::from).orElse(null),
                 Optional.ofNullable(patientRecord.getDoctor()).map(Doctor::getId).orElse(null),
                 Optional.ofNullable(patientRecord.getPatient()).map(Patient::getId).orElse(null),
@@ -62,7 +62,7 @@ public class PatientRecordRepository extends RookieRepository {
                 patientRecord.getTypeVisit());
         patientRecord.setId(id);
     }
-    
+
     private PatientRecord map(ResultSet resultSet, int i) throws SQLException {
         PatientRecord patientRecord = new PatientRecord();
         Long id = resultSet.getLong("id");

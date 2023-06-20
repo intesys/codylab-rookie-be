@@ -1,6 +1,7 @@
 package it.intesys.codylab.rookie.repository;
 
 import it.intesys.codylab.rookie.domain.Doctor;
+import it.intesys.codylab.rookie.domain.Patient;
 import it.intesys.codylab.rookie.exceptions.NotFound;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -44,7 +45,7 @@ public class DoctorRepository extends RookieRepository {
     private void create(Doctor doctor) {
         Long id = db.queryForObject("select nextval ('id_generator')", Long.class);
         db.update("insert into doctor (id, name, surname, phone_number, address, email, avatar, profession)" +
-                "values (?, ?, ?, ?, ?, ?, ?, ?)",
+                        "values (?, ?, ?, ?, ?, ?, ?, ?)",
                 id,
                 doctor.getName(),
                 doctor.getSurname(),
@@ -127,5 +128,12 @@ public class DoctorRepository extends RookieRepository {
     public void remove(Long id)  throws NotFound {
         findById(id);
         db.update("delete from doctor where id = ?", id);
+    }
+
+    public List<Doctor> findByPatient(Patient patient) {
+        return db.query ("select * from doctor where id in (  " +
+                "select distinct doctor_id  from patient_record   " +
+                "where patient_id = ?)   " +
+                "order by surname", this::map, patient.getId());
     }
 }

@@ -75,24 +75,4 @@ public class PatientRecordDTO {
     public void setTreatmentMade(String treatmentMade) {
         this.treatmentMade = treatmentMade;
     }
-
-    /*
-        id:
-          type: integer
-          format: int64
-        patientId:
-          type: integer
-          format: int64
-        doctor:
-          $ref: '#/components/schemas/DoctorDTO'
-        date:
-          type: string
-          format: date-time
-        typeVisit:
-          type: string
-        reasonVisit:
-          type: string
-        treatmentMade:
-          type: string
- */
 }

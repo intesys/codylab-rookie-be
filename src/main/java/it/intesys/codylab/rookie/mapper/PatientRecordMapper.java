@@ -27,12 +27,12 @@ public class PatientRecordMapper implements RookieMapper<PatientRecord, PatientR
         entity.setId(dto.getId());
         entity.setDate(dto.getDate());
         entity.setDoctor(Optional.ofNullable(dto.getDoctor())
-            .map(DoctorDTO::getId)
-            .map(doctorRepository::findById)
-            .orElse(null));
+                .map(DoctorDTO::getId)
+                .map(doctorRepository::findById)
+                .orElse(null));
         entity.setPatient(Optional.ofNullable(dto.getPatientId())
-            .map(patientRepository::findById)
-            .orElse(null));
+                .map(patientRepository::findById)
+                .orElse(null));
         entity.setReasonVisit(dto.getReasonVisit());
         entity.setTreatmentMade(dto.getTreatmentMade());
         entity.setTypeVisit(dto.getTypeVisit());
@@ -45,11 +45,11 @@ public class PatientRecordMapper implements RookieMapper<PatientRecord, PatientR
         dto.setId(entity.getId());
         dto.setDate(entity.getDate());
         dto.setDoctor(Optional.ofNullable(entity.getDoctor())
-            .map(doctorMapper::toDTO)
-            .orElse(null));
+                .map(doctorMapper::toDTO)
+                .orElse(null));
         dto.setPatientId(Optional.ofNullable(entity.getPatient())
-            .map(Patient::getId)
-            .orElse(null));
+                .map(Patient::getId)
+                .orElse(null));
         dto.setReasonVisit(entity.getReasonVisit());
         dto.setTreatmentMade(entity.getTreatmentMade());
         dto.setTypeVisit(entity.getTypeVisit());

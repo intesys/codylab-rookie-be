@@ -5,10 +5,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
 public class RookieApi {
-    /*
-            campo
-            campo,direzione
-         */
     protected Pageable pageable(Integer page, Integer size, String sort) {
         if (sort != null && !sort.isBlank()) {
             Sort.Order order;

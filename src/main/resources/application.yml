@@ -8,4 +8,6 @@ spring:
     username: postgres
     password: 123456
 
-
+springdoc:
+  swagger-ui:
+    url: /v3/api-docs.yaml
