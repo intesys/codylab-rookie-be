@@ -38,6 +38,8 @@ public class PatientDTO {
     private Long lastDoctorVisitedId;
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     private List<PatientRecordDTO> patientRecords;
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
+    private List<Long> doctorIds;
 
 /*
         patientRecords:
@@ -171,5 +173,13 @@ public class PatientDTO {
 
     public void setPatientRecords(List<PatientRecordDTO> patientRecords) {
         this.patientRecords = patientRecords;
+    }
+
+    public List<Long> getDoctorIds() {
+        return doctorIds;
+    }
+
+    public void setDoctorIds(List<Long> doctorIds) {
+        this.doctorIds = doctorIds;
     }
 }
