@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.example</groupId>
-    <artifactId>codylab-rookie-be</artifactId>
+    <artifactId>app</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
@@ -15,6 +15,7 @@
         <postgresql.version>42.6.0</postgresql.version>
         <flyway.version>9.8.1</flyway.version>
         <springdoc.version>2.0.2</springdoc.version>
+        <h2.version>2.1.214</h2.version>
     </properties>
 
     <dependencies>
@@ -49,6 +50,15 @@
             <version>${spring-boot.version}</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <scope>test</scope>
+            <version>${h2.version}</version>
+        </dependency>
+
+
+
     </dependencies>
 
     <build>

@@ -1,0 +1,13 @@
+server:
+  port: 8081
+
+spring:
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:h2:mem:rookie;DB_CLOSE_DELAY=-1
+    username:
+    password:
+
+springdoc:
+  swagger-ui:
+    url: /v3/api-docs.yaml
