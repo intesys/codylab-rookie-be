@@ -7,6 +7,6 @@ CREATE TABLE patient_record (
 	reason_visit varchar(1024) not null,
 	treatment_made varchar(1024) not null,
 	CONSTRAINT patient_record_pk PRIMARY KEY (id),
-    CONSTRAINT fk_doctor FOREIGN KEY(doctor_id) REFERENCES doctor(id),
-    CONSTRAINT fk_patient FOREIGN KEY(patient_id) REFERENCES patient(id)
+    CONSTRAINT fk_patient_record_doctor FOREIGN KEY(doctor_id) REFERENCES doctor(id),
+    CONSTRAINT k_patient_record_patient FOREIGN KEY(patient_id) REFERENCES patient(id)
 );

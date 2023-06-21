@@ -4,30 +4,70 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b5090878-2fce-446b-9b99-b7d574d1412a" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/codylab-rookie-be.iml" afterDir="false" />
+    <list default="true" id="3b7448e9-8a06-42bd-9d77-2ed50b57a551" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/it/intesys/codylab/rookie/DoctorApiTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/resources/application.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/resources/sql/doctors.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/App.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Doctor.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/DoctorApi.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/DoctorDTO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/DoctorMapper.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/DoctorRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/DoctorService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Mapper.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/api.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/api.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/codylab-rookie-be.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/intesys/codylab/rookie/App.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/PatientRecord/PatientRecord.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/intesys/codylab/rookie/PatientRecord/PatientRecord.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/api/DoctorApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/intesys/codylab/rookie/api/DoctorApi.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/api/RookieApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/intesys/codylab/rookie/api/RookieApi.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/domain/BloodGroup.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/intesys/codylab/rookie/domain/BloodGroup.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/domain/Doctor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/intesys/codylab/rookie/domain/Doctor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/domain/Patient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/intesys/codylab/rookie/domain/Patient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/dto/DoctorDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/intesys/codylab/rookie/dto/DoctorDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/dto/DoctorFilterDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/intesys/codylab/rookie/dto/DoctorFilterDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/exception/NotFound.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/intesys/codylab/rookie/exception/NotFound.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/mapper/DoctorMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/intesys/codylab/rookie/mapper/DoctorMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/mapper/Mapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/intesys/codylab/rookie/mapper/Mapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/patient/PatientApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/intesys/codylab/rookie/patient/PatientApi.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/patient/PatientRecordApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/intesys/codylab/rookie/patient/PatientRecordApi.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/patientdto/PatientDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/intesys/codylab/rookie/patientdto/PatientDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/patientdto/PatientFilterDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/intesys/codylab/rookie/patientdto/PatientFilterDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/patientdto/PatientRecordDTo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/intesys/codylab/rookie/patientdto/PatientRecordDTo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/patientmapper/BloodGroupDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/intesys/codylab/rookie/patientmapper/BloodGroupDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/patientmapper/PMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/intesys/codylab/rookie/patientmapper/PMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/patientmapper/PatientMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/intesys/codylab/rookie/patientmapper/PatientMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/patientmapper/PatientRecordDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/intesys/codylab/rookie/patientmapper/PatientRecordDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/patientmapper/PatientRecordMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/intesys/codylab/rookie/patientmapper/PatientRecordMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/patientmapper/RookieMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/intesys/codylab/rookie/patientmapper/RookieMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/patientrepository/PatientRecordRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/intesys/codylab/rookie/patientrepository/PatientRecordRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/patientrepository/PatientRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/intesys/codylab/rookie/patientrepository/PatientRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/patientrepository/RookieRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/intesys/codylab/rookie/patientrepository/RookieRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/repository/DoctorRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/intesys/codylab/rookie/repository/DoctorRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/service/DoctorService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/intesys/codylab/rookie/service/DoctorService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/service/PatientRecordService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/intesys/codylab/rookie/service/PatientRecordService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/service/PatientService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/intesys/codylab/rookie/service/PatientService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/db/migration/V1.0.2__create_patient.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/db/migration/V1.0.2__create_patient.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/db/migration/V1.0.3__create_patient_record.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/db/migration/V1.0.3__create_patient_record.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/main/resources/api.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/main/resources/application.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/example/App.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/example/api/DoctorApi.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/example/domain/Doctor.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/example/dto/DoctorDTO.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/example/dto/DoctorFilterDTO.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/example/mapper/DoctorMapper.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/example/mapper/Mapper.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/example/repository/DoctorRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/example/service/DoctorService.class" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CompilerWorkspaceConfiguration">
+    <option name="MAKE_PROJECT_ON_SAVE" value="true" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -39,76 +79,120 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/src/test/java/it/intesys/codylab/rookie/DoctorApiTest.java" root0="SKIP_INSPECTION" />
+  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="MavenImportPreferences">
-    <option name="generalSettings">
-      <MavenGeneralSettings>
-        <option name="useMavenConfig" value="true" />
-      </MavenGeneralSettings>
-    </option>
+  <component name="ProjectId" id="2RVjgJp9cafYl2a4agKggcwpoBi" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
   </component>
-  <component name="ProjectId" id="2RC3hxL7TPugw7NYk5AY3HnKnwT" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/flerk/Progetti/codylab-rookie-be/src/main/java/org/example/App.java&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.repository.indices&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "last_opened_file_path": "C:/Users/flerk/Progetti/codylab-rookie-be/src/test/resources/sql",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "project.propCompiler"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\flerk\Progetti\codylab-rookie-be\src\test\resources\sql" />
+      <recent name="C:\Users\flerk\Progetti\codylab-rookie-be\src\test\resources" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\flerk\Progetti\codylab-rookie-be" />
+      <recent name="C:\Users\flerk\Progetti\codylab-rookie-be\src\test\resources" />
+      <recent name="C:\Users\flerk\Progetti\codylab-rookie-be\src\main\resources" />
+      <recent name="C:\Users\flerk\Progetti\codylab-rookie-be\src\test\resources\sql" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="it.intesys.codylab.rookie" />
     </key>
   </component>
-  <component name="RunManager">
-    <configuration name="Unnamed" type="Application" factoryName="Application" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.DoctorApiTest.getListDoctorTest">
+    <configuration name="App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.example.App" />
-      <module name="codylab-rookie-be" />
+      <module name="app" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.example.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.example.Main" />
+      <module name="app" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.example.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="DoctorApiTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="app" />
+      <option name="PACKAGE_NAME" value="it.intesys.codylab.rookie" />
+      <option name="MAIN_CLASS_NAME" value="it.intesys.codylab.rookie.DoctorApiTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="DoctorApiTest.getListDoctorTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="app" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="it.intesys.codylab.rookie.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="it.intesys.codylab.rookie" />
+      <option name="MAIN_CLASS_NAME" value="it.intesys.codylab.rookie.DoctorApiTest" />
+      <option name="METHOD_NAME" value="getListDoctorTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.DoctorApiTest.getListDoctorTest" />
+        <item itemvalue="JUnit.DoctorApiTest" />
+        <item itemvalue="Application.App" />
+        <item itemvalue="Application.Main" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="b5090878-2fce-446b-9b99-b7d574d1412a" name="Changes" comment="" />
-      <created>1686730711171</created>
+      <changelist id="3b7448e9-8a06-42bd-9d77-2ed50b57a551" name="Changes" comment="" />
+      <created>1687342252520</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1686730711171</updated>
+      <updated>1687342252520</updated>
     </task>
     <servers />
   </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State>
-              <option name="FILTERS">
-                <map>
-                  <entry key="branch">
-                    <value>
-                      <list>
-                        <option value="origin/Francesco" />
-                      </list>
-                    </value>
-                  </entry>
-                </map>
-              </option>
-            </State>
-          </value>
-        </entry>
-      </map>
-    </option>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
 </project>
