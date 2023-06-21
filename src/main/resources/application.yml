@@ -1,5 +1,5 @@
 server:
-  port: 8081
+  port: 8080
 
 spring:
   datasource:
@@ -11,4 +11,3 @@ spring:
 springdoc:
   swagger-ui:
     url: /v3/api-docs.yaml
-
