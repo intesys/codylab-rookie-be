@@ -14,5 +14,5 @@ CREATE TABLE patient (
     last_admission timestamp,
     last_doctor_visited_id bigint,
 	CONSTRAINT patient_pkey PRIMARY KEY (id),
-    CONSTRAINT fk_doctor FOREIGN KEY(last_doctor_visited_id) REFERENCES doctor(id)
+    CONSTRAINT fk_patient_doctor FOREIGN KEY(last_doctor_visited_id) REFERENCES doctor(id)
 );
