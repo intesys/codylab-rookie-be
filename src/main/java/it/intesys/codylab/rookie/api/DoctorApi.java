@@ -19,7 +19,7 @@ import java.util.List;
 public class DoctorApi extends  RookieApi{
     public static final String API_DOCTOR_ID = "/api/doctor/{id}";
     public static final String API_DOCTOR_FILTER = "/api/doctor/filter";
-    public static final String API_DOCTOR = "api/doctor";
+    public static final String API_DOCTOR = "/api/doctor";
     @Autowired
     private DoctorService doctorService;
     @PostMapping(API_DOCTOR)
