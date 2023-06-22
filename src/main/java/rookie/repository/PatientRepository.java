@@ -82,7 +82,7 @@ public class PatientRepository extends RookieRepository {
         List<Object> parameterList = new ArrayList<>();
 
         if (text != null && !text.isBlank()) {
-            buffer.append(whereOrAnd).append(' ').append("name like '%?%' or surname like '%?%' or email like '%?%' ");
+            buffer.append(whereOrAnd).append(' ').append("name like concat ('%', ?, '%') or surname like concat ('%', ?, '%') or email like concat ('%', ?, '%') ");
             whereOrAnd = and;
             parameterList.addAll(List.of(text, text, text));
         }

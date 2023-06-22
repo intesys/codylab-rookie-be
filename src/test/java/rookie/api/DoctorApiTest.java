@@ -30,7 +30,8 @@ public class DoctorApiTest {
     private MockMvc mvc;
     @Autowired
     WebApplicationContext context;
-    ObjectMapper jsonMapper = new ObjectMapper();
+    @Autowired
+    ObjectMapper jsonMapper;
     @Autowired
     JdbcTemplate db;
 
@@ -74,11 +75,11 @@ public class DoctorApiTest {
     @Sql(scripts = "/sql/doctors.sql")
     void getListDoctorTest () throws Exception {
         DoctorFilterDTO doctorFilterDTO = new DoctorFilterDTO();
-        String expectedSurname = "Test";
+        String expectedSurname = "Testsurname";
         doctorFilterDTO.setSurname(expectedSurname);
         String jsonRequest = jsonMapper.writeValueAsString(doctorFilterDTO);
-        String expectedProfession1 = "Calciatore";
-        String expectedProfession2 = "Arrotino";
+        String expectedProfession1 = "Nullafacente";
+        String expectedProfession2 = "Calciatore";
 
         MvcResult result = mvc.perform(MockMvcRequestBuilders
                 .post(DoctorApi.API_DOCTOR_FILTER)
@@ -103,6 +104,79 @@ public class DoctorApiTest {
         Assertions.assertEquals(expectedProfession2, doctorDTO_due.getProfession(), "doctorDTO_due profession");
     }
 
+    @Test
+    @Sql(scripts = "/sql/doctors.sql")
+    void getDoctorTest() throws Exception{
+        final Long id = 3L;
+        final String name = "Pippo";
+        final String surname = "Testsurname";
+        final String phoneNumber = "444 7777777";
+        final String email = "pippo.testsurname@gmail.com";
+        final String profession = "Arrotino";
+
+        MvcResult result = mvc.perform(MockMvcRequestBuilders
+                .get(DoctorApi.API_DOCTOR_ID, id))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andReturn();
+
+        String jsonResponse = result.getResponse().getContentAsString();
+        DoctorDTO doctorDTO = jsonMapper.readValue(jsonResponse, DoctorDTO.class);
+        Assertions.assertEquals(id, doctorDTO.getId(), "id");
+        Assertions.assertEquals(name, doctorDTO.getName(), "name");
+        Assertions.assertEquals(surname, doctorDTO.getSurname(), "surname");
+        Assertions.assertEquals(phoneNumber, doctorDTO.getPhoneNumber(), "phone_number");
+        Assertions.assertEquals(email, doctorDTO.getEmail(), email);
+        Assertions.assertEquals(profession, doctorDTO.getProfession(), "profession");
+    }
+
+    @Test
+    @Sql(scripts = "/sql/doctors.sql")
+    void upgradeDoctorTest() throws Exception{
+        final Long id = 3L;
+        final String name = "Pippo";
+        final String surname = "Testsurname";
+        final String phoneNumber = "444 7777777";
+        final String email = "pippo.testsurname@gmail.com";
+        final String intialProfession = "Arrotino";
+        final String profession = "Calzolaio";
+
+        String currentProfession = db.queryForObject("select profession from doctor where id = ?", String.class, id);
+        Assertions.assertEquals(intialProfession, currentProfession, "initial profession");
+
+        DoctorDTO doctorDTO = new DoctorDTO();
+        doctorDTO.setName(name);
+        doctorDTO.setSurname(surname);
+        doctorDTO.setPhoneNumber(phoneNumber);
+        doctorDTO.setEmail(email);
+        doctorDTO.setProfession(profession);
+        String jsonRequest = jsonMapper.writeValueAsString(doctorDTO);
+
+        mvc.perform(MockMvcRequestBuilders
+                .put(DoctorApi.API_DOCTOR_ID, id)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(jsonRequest))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andReturn();
+        currentProfession = db.queryForObject("select profession from doctor where id = ?", String.class, id);
+        Assertions.assertEquals(profession, currentProfession, "initial profession");
+    }
+
+    @Test
+    @Sql(scripts = "/sql/doctors.sql")
+    void deleteDoctorTest() throws Exception{
+        final Long id = 3L;
+
+        int count = db.queryForObject("select count (*) from doctor where id = ?", Integer.class, id);
+        Assertions.assertEquals(1, count, "doctor exists");
+
+
+        mvc.perform(MockMvcRequestBuilders
+                .delete(DoctorApi.API_DOCTOR_ID, id))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andReturn();
+        count = db.queryForObject("select count (*) from doctor where id = ?", Integer.class, id);
+        Assertions.assertEquals(0, count, "doctor does not exists");
+    }
     @BeforeEach
     void setup () {
         mvc = MockMvcBuilders.webAppContextSetup(context).build();

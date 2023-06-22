@@ -1,12 +1,13 @@
 INSERT INTO doctor (id, name,surname,phone_number,address,email,avatar,profession) VALUES
-    (1, 'Pietro','Test','444 7777777',NULL,'pietro.saccomando@gmail.com',NULL,'Arrotino'),
-    (2, 'Pietro','Test','444 7777777',NULL,'pietro.saccomando@gmail.com',NULL,'Calciatore'),
-    (3, 'Pietro','Test','444 7777777',NULL,'pietro.saccomando@gmail.com',NULL,'Professore'),
-    (4, 'Pietro','Test','444 7777777',NULL,'pietro.saccomando@gmail.com',NULL,'Programmatore'),
-    (6, 'Pietro','Saccomando',NULL,NULL,'pietro.saccomando@gmail.com',NULL,NULL),
-    (7, 'Pietro','Saccomando',NULL,NULL,'pietro.saccomando@gmail.com',NULL,NULL),
-    (8, 'Pietro','Saccomando',NULL,NULL,'pietro.saccomando@gmail.com',NULL,NULL),
-    (9, 'Pietro','Saccomando',NULL,NULL,'pietro.saccomando@gmail.com',NULL,NULL);
+     (3, 'Pippo','Testsurname','444 7777777',NULL,'pippo.testsurname@gmail.com',NULL,'Arrotino'),
+      (5, 'Pippo','Testsurname','444 7777777',NULL,'pippo.testsurname@gmail.com',NULL,'Calciatore'),
+      (9, 'Pippo','Testsurname','444 7777777',NULL,'pippo.testsurname@gmail.com',NULL,'Nullafacente'),
+      (7, 'Pippo','Testsurname','444 7777777',NULL,'pippo.testsurname@gmail.com',NULL,'Programmatore'),
+      (1, 'Pippo','Testsurname','444 7777777',NULL,'pippo.testsurname@gmail.com',NULL,'Scalpellino'),
+      (2, 'Pietro','Saccomando',NULL,NULL,'pietro.saccomando@gmail.com',NULL,NULL),
+      (4, 'Pietro','Saccomando',NULL,NULL,'pietro.saccomando@gmail.com',NULL,NULL),
+      (6, 'Pietro','Saccomando',NULL,NULL,'pietro.saccomando@gmail.com',NULL,NULL),
+      (8, 'Pietro','Saccomando',NULL,NULL,'pietro.saccomando@gmail.com',NULL,NULL);
 
 
 

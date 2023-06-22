@@ -9,8 +9,7 @@ import rookie.service.PatientRecordService;
 
 @RestController
 public class PatientRecordApi extends RookieApi {
-    public static final String API_PATIENT_RECORD_ID = "api/patientRecord/{id}";
-    public static final String API_PATIENT_RECORD_FILTER = "/api/patientRecord/filter";
+    public static final String API_PATIENT_RECORD_ID = "/api/patientRecord/{id}";
     public static final String API_PATIENT_RECORD = "/api/patientRecord";
     @Autowired
     private PatientRecordService patientRecordService;
