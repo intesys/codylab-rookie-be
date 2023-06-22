@@ -30,7 +30,8 @@ public class DoctorApiTest {
     private MockMvc mvc;
     @Autowired
     WebApplicationContext context;
-    ObjectMapper jsonMapper = new ObjectMapper();
+    @Autowired
+    ObjectMapper jsonMapper;
     @Autowired
     JdbcTemplate db;
 
