@@ -4,62 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3b7448e9-8a06-42bd-9d77-2ed50b57a551" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/it/intesys/codylab/rookie/DoctorApiTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/resources/application.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/resources/sql/doctors.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+    <list default="true" id="3b7448e9-8a06-42bd-9d77-2ed50b57a551" name="Changes" comment="BackEnd">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/codylab-rookie-be.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/intesys/codylab/rookie/App.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/PatientRecord/PatientRecord.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/intesys/codylab/rookie/PatientRecord/PatientRecord.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/api/DoctorApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/intesys/codylab/rookie/api/DoctorApi.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/api/RookieApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/intesys/codylab/rookie/api/RookieApi.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/domain/BloodGroup.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/intesys/codylab/rookie/domain/BloodGroup.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/domain/Doctor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/intesys/codylab/rookie/domain/Doctor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/domain/Patient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/intesys/codylab/rookie/domain/Patient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/dto/DoctorDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/intesys/codylab/rookie/dto/DoctorDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/dto/DoctorFilterDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/intesys/codylab/rookie/dto/DoctorFilterDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/exception/NotFound.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/intesys/codylab/rookie/exception/NotFound.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/mapper/DoctorMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/intesys/codylab/rookie/mapper/DoctorMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/mapper/Mapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/intesys/codylab/rookie/mapper/Mapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/patient/PatientApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/intesys/codylab/rookie/patient/PatientApi.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/patient/PatientRecordApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/intesys/codylab/rookie/patient/PatientRecordApi.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/patientdto/PatientDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/intesys/codylab/rookie/patientdto/PatientDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/patientdto/PatientFilterDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/intesys/codylab/rookie/patientdto/PatientFilterDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/patientdto/PatientRecordDTo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/intesys/codylab/rookie/patientdto/PatientRecordDTo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/patientmapper/BloodGroupDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/intesys/codylab/rookie/patientmapper/BloodGroupDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/patientmapper/PMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/intesys/codylab/rookie/patientmapper/PMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/patientmapper/PatientMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/intesys/codylab/rookie/patientmapper/PatientMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/patientmapper/PatientRecordDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/intesys/codylab/rookie/patientmapper/PatientRecordDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/patientmapper/PatientRecordMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/intesys/codylab/rookie/patientmapper/PatientRecordMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/patientmapper/RookieMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/intesys/codylab/rookie/patientmapper/RookieMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/patientrepository/PatientRecordRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/intesys/codylab/rookie/patientrepository/PatientRecordRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/patientrepository/PatientRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/intesys/codylab/rookie/patientrepository/PatientRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/patientrepository/RookieRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/intesys/codylab/rookie/patientrepository/RookieRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/repository/DoctorRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/intesys/codylab/rookie/repository/DoctorRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/service/DoctorService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/intesys/codylab/rookie/service/DoctorService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/service/PatientRecordService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/intesys/codylab/rookie/service/PatientRecordService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/service/PatientService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/intesys/codylab/rookie/service/PatientService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/db/migration/V1.0.2__create_patient.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/db/migration/V1.0.2__create_patient.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/db/migration/V1.0.3__create_patient_record.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/db/migration/V1.0.3__create_patient_record.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/main/resources/api.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/main/resources/application.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/example/App.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/example/api/DoctorApi.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/example/domain/Doctor.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/example/dto/DoctorDTO.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/example/dto/DoctorFilterDTO.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/example/mapper/DoctorMapper.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/example/mapper/Mapper.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/example/repository/DoctorRepository.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/example/service/DoctorService.class" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -99,7 +45,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "last_opened_file_path": "C:/Users/flerk/Progetti/codylab-rookie-be/src/test/resources/sql",
+    "last_opened_file_path": "C:/Users/flerk/Progetti",
     "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.2",
@@ -190,9 +136,20 @@
       <option name="presentableId" value="Default" />
       <updated>1687342252520</updated>
     </task>
+    <task id="LOCAL-00001" summary="BackEnd">
+      <option name="closed" value="true" />
+      <created>1687363962720</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1687363962720</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="BackEnd" />
+    <option name="LAST_COMMIT_MESSAGE" value="BackEnd" />
   </component>
 </project>
