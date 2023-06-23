@@ -167,7 +167,7 @@ public class PatientRepository extends RookieRepository {
 
     public Patient findById(Long id) throws NotFound {
         try{
-            return db.queryForObject("select * from patient where id = ?", this::map, id);
+            return db.queryForObject("select * from patient where id = ? ", this::map, id);
         }catch (EmptyResultDataAccessException e){
             throw new NotFound(Patient.class, id);
         }

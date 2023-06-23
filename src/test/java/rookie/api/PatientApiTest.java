@@ -18,6 +18,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
 import rookie.dto.PatientDTO;
 import rookie.dto.PatientFilterDTO;
+import rookie.dto.PatientRecordDTO;
+import rookie.repository.RookieRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -71,9 +73,9 @@ public class PatientApiTest {
     }
 
     @Test
-    @Sql(scripts = "/sql/patients.sql")
-    void getListDoctorTest () throws Exception {
-        String expectedSurname = "Test";
+    @Sql(scripts = {"/sql/doctors.sql", "/sql/patients.sql", "/sql/patient_records.sql"})
+    void getListPatientTest () throws Exception {
+        String expectedSurname = "Pavarana";
         String expectedName1 = "Qua";
         String expectedName2 = "Paperone";
 
@@ -96,35 +98,61 @@ public class PatientApiTest {
         List<PatientDTO> patientDTOList = jsonMapper.readValue(jsonResponse, jsonMapper.getTypeFactory().constructCollectionType(ArrayList.class, PatientDTO.class));
         Assertions.assertNotNull(patientDTOList);
         Assertions.assertEquals(2, patientDTOList.size(), "patientDTOList size");
+        PatientDTO qua = patientDTOList.get(0);
+        Assertions.assertEquals(expectedSurname, qua.getSurname(), "qua surname");
+        Assertions.assertEquals(expectedName1, qua.getName(), "qua name");
+        PatientDTO paperone = patientDTOList.get(1);
+        Assertions.assertEquals(expectedSurname, paperone.getSurname(), "paperone surname");
+        Assertions.assertEquals(expectedName2, paperone.getName(), "paperone name");
 
-        PatientDTO patientDTO_uno = patientDTOList.get(0);
-        Assertions.assertEquals(expectedSurname, patientDTO_uno.getSurname(), "patientDTO_uno surname");
-        Assertions.assertEquals(expectedName1, patientDTO_uno.getName(), "patientDTO_uno name");
+        List<PatientRecordDTO> patientRecordDTOList = qua.getPatientRecords();
+        Assertions.assertEquals(RookieRepository.LATEST_RECORD_SIZE, patientRecordDTOList.size(), "Numero di record");
+        PatientRecordDTO firstRecord = patientRecordDTOList.get(0);
+        Assertions.assertEquals("settima visita", firstRecord.getTypeVisit(), "Tipo di visita primo record");
+        PatientRecordDTO lastRecord = patientRecordDTOList.get(RookieRepository.LATEST_RECORD_SIZE - 1);
+        Assertions.assertEquals("terza visita", lastRecord.getTypeVisit(), "Tipo di visita ultimo record");
 
-        PatientDTO patientDTO_due = patientDTOList.get(1);
-        Assertions.assertEquals(expectedSurname, patientDTO_due.getSurname(), "patientDTO_due surname");
-        Assertions.assertEquals(expectedName2, patientDTO_due.getName(), "patientDTO_due name");
+        Assertions.assertEquals(List.of(3L, 5L, 7L), qua.getDoctorIds().stream()
+                .sorted()
+                .toList(), "qua doctorIds");
+        Assertions.assertEquals(List.of(3L, 5L), paperone.getDoctorIds().stream()
+                .sorted()
+                .toList(), "paperone doctor ids");
+
     }
 
     @Test
-    @Sql(scripts = "/sql/patients.sql")
-    void getPatientTest() throws Exception{
+    @Sql(scripts = {"/sql/doctors.sql", "/sql/patients.sql", "/sql/patient_records.sql"})
+    void getPatientTest () throws Exception {
+        final int expectedNumberOfRecords = 7;
         final Long id = 31L;
         final String name = "Qua";
-        final String surname = "Test";
-        final String email = "qua.test@gmail.com";
+        final String surname = "Pavarana";
+        final String email = "franco.pavarana@gmail.com";
 
         MvcResult result = mvc.perform(MockMvcRequestBuilders
-                .get(PatientApi.API_PATIENT_ID, id))
+                        .get(PatientApi.API_PATIENT_ID, id))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andReturn();
-
         String jsonResponse = result.getResponse().getContentAsString();
-        PatientDTO doctorDTO = jsonMapper.readValue(jsonResponse, PatientDTO.class);
-        Assertions.assertEquals(id, doctorDTO.getId(), "id");
-        Assertions.assertEquals(name, doctorDTO.getName(), "name");
-        Assertions.assertEquals(surname, doctorDTO.getSurname(), "surname");
-        Assertions.assertEquals(email, doctorDTO.getEmail(), "email");
+
+        PatientDTO qua = jsonMapper.readValue(jsonResponse, PatientDTO.class);
+        Assertions.assertEquals(id, qua.getId(), "id");
+        Assertions.assertEquals(name, qua.getName(), "name");
+        Assertions.assertEquals(surname, qua.getSurname(), "surname");
+        Assertions.assertEquals(email, qua.getEmail(), "email");
+
+        List<PatientRecordDTO> patientRecordDTOList = qua.getPatientRecords();
+
+        Assertions.assertEquals(expectedNumberOfRecords, patientRecordDTOList.size(), "Numero di record");
+        PatientRecordDTO firstRecord = patientRecordDTOList.get(0);
+        Assertions.assertEquals("settima visita", firstRecord.getTypeVisit(), "Tipo di visita primo record");
+        PatientRecordDTO lastRecord = patientRecordDTOList.get(expectedNumberOfRecords - 1);
+        Assertions.assertEquals("prima visita", lastRecord.getTypeVisit(), "Tipo di visita ultimo record");
+
+        Assertions.assertEquals(List.of(3L, 5L, 7L), qua.getDoctorIds().stream()
+                .sorted()
+                .toList(), "qua doctor ids");
     }
 
     @Test

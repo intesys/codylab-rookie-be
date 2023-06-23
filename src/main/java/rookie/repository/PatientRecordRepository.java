@@ -99,7 +99,7 @@ public class PatientRecordRepository extends RookieRepository {
     }
 
     public List<PatientRecord> findByPatient(Patient patient){
-        return db.query("select * from patient_record where patient_id = ?", this::map, patient.getId());
+        return db.query("select * from patient_record where patient_id = ? order by date desc", this::map, patient.getId());
     }
 
     public List<PatientRecord> findLatestRecordByPatient(Patient patient){

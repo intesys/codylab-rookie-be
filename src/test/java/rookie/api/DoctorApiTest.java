@@ -19,6 +19,8 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
+import rookie.dto.PatientDTO;
+import rookie.repository.RookieRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -72,61 +74,73 @@ public class DoctorApiTest {
     }
 
     @Test
-    @Sql(scripts = "/sql/doctors.sql")
+    @Sql(scripts = {"/sql/doctors.sql", "/sql/patients.sql", "/sql/patient_records.sql"})
     void getListDoctorTest () throws Exception {
-        DoctorFilterDTO doctorFilterDTO = new DoctorFilterDTO();
         String expectedSurname = "Testsurname";
-        doctorFilterDTO.setSurname(expectedSurname);
-        String jsonRequest = jsonMapper.writeValueAsString(doctorFilterDTO);
         String expectedProfession1 = "Nullafacente";
         String expectedProfession2 = "Calciatore";
 
+        DoctorFilterDTO doctorFilterDTO = new DoctorFilterDTO();
+        doctorFilterDTO.setSurname(expectedSurname);
+        String jsonRequest = jsonMapper.writeValueAsString(doctorFilterDTO);
+
         MvcResult result = mvc.perform(MockMvcRequestBuilders
-                .post(DoctorApi.API_DOCTOR_FILTER)
-                .contentType(MediaType.APPLICATION_JSON)
-                .param("page", "1")
-                .param("size", "2")
-                .param("sort", "profession,desc")
-                .content(jsonRequest))
+                        .post(DoctorApi.API_DOCTOR_FILTER)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .param("page", "1")
+                        .param("size", "2")
+                        .param("sort", "profession,desc")
+                        .content(jsonRequest))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andReturn();
+
         String jsonResponse = result.getResponse().getContentAsString();
+
         List<DoctorDTO> doctorDTOList = jsonMapper.readValue(jsonResponse, jsonMapper.getTypeFactory().constructCollectionType(ArrayList.class, DoctorDTO.class));
         Assertions.assertNotNull(doctorDTOList);
         Assertions.assertEquals(2, doctorDTOList.size(), "doctorDTOList size");
+        DoctorDTO nullafacente = doctorDTOList.get(0);
+        Assertions.assertEquals(expectedSurname, nullafacente.getSurname(), "nullafacente surname");
+        Assertions.assertEquals(expectedProfession1, nullafacente.getProfession(), "nullafacente profession");
+        DoctorDTO calciatore = doctorDTOList.get(1);
+        Assertions.assertEquals(expectedSurname, calciatore.getSurname(), "calciatore surname");
+        Assertions.assertEquals(expectedProfession2, calciatore.getProfession(), "calciatore profession");
 
-        DoctorDTO doctorDTO_uno = doctorDTOList.get(0);
-        Assertions.assertEquals(expectedSurname, doctorDTO_uno.getSurname(), "doctorDTO_uno surname");
-        Assertions.assertEquals(expectedProfession1, doctorDTO_uno.getProfession(), "doctorDTO_uno profession");
-
-        DoctorDTO doctorDTO_due = doctorDTOList.get(1);
-        Assertions.assertEquals(expectedSurname, doctorDTO_due.getSurname(), "doctorDTO_due surname");
-        Assertions.assertEquals(expectedProfession2, doctorDTO_due.getProfession(), "doctorDTO_due profession");
+        List<PatientDTO> calciatorePatientDTOList = calciatore.getLatestPatients();
+        Assertions.assertEquals(RookieRepository.LATEST_RECORD_SIZE, calciatorePatientDTOList.size(), "Ultimi pazienti del calciatore");
+        Assertions.assertFalse(calciatorePatientDTOList.stream()
+                .map(PatientDTO::getId)
+                .toList()
+                .contains(5L), "Manca il paziente 5");
     }
 
     @Test
-    @Sql(scripts = "/sql/doctors.sql")
-    void getDoctorTest() throws Exception{
+    @Sql(scripts = {"/sql/doctors.sql", "/sql/patients.sql", "/sql/patient_records.sql"})
+    void getDoctorTest () throws Exception {
         final Long id = 3L;
-        final String name = "Pippo";
+        final String name = "Rafaello";
         final String surname = "Testsurname";
         final String phoneNumber = "444 7777777";
-        final String email = "pippo.testsurname@gmail.com";
+        final String email = "rafaello.marchiori@gmail.com";
         final String profession = "Arrotino";
 
         MvcResult result = mvc.perform(MockMvcRequestBuilders
-                .get(DoctorApi.API_DOCTOR_ID, id))
+                        .get(DoctorApi.API_DOCTOR_ID, id))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andReturn();
-
         String jsonResponse = result.getResponse().getContentAsString();
-        DoctorDTO doctorDTO = jsonMapper.readValue(jsonResponse, DoctorDTO.class);
-        Assertions.assertEquals(id, doctorDTO.getId(), "id");
-        Assertions.assertEquals(name, doctorDTO.getName(), "name");
-        Assertions.assertEquals(surname, doctorDTO.getSurname(), "surname");
-        Assertions.assertEquals(phoneNumber, doctorDTO.getPhoneNumber(), "phone_number");
-        Assertions.assertEquals(email, doctorDTO.getEmail(), email);
-        Assertions.assertEquals(profession, doctorDTO.getProfession(), "profession");
+
+        DoctorDTO arrotino = jsonMapper.readValue(jsonResponse, DoctorDTO.class);
+        Assertions.assertEquals(id, arrotino.getId(), "id");
+        Assertions.assertEquals(name, arrotino.getName(), "name");
+        Assertions.assertEquals(surname, arrotino.getSurname(), "surname");
+        Assertions.assertEquals(phoneNumber, arrotino.getPhoneNumber(), "phoneNumber");
+        Assertions.assertEquals(email, arrotino.getEmail(), "email");
+        Assertions.assertEquals(profession, arrotino.getProfession(), "profession");
+
+        List<PatientDTO> arrotinoPatientDTOList = arrotino.getLatestPatients();
+        Assertions.assertEquals(2, arrotinoPatientDTOList.size(), "Ultimi pazienti del calciatore");
+        Assertions.assertEquals(31L, arrotinoPatientDTOList.get(0).getId(), "Id del paziente");
     }
 
     @Test
