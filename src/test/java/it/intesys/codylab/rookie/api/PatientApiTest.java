@@ -110,6 +110,14 @@ public class PatientApiTest {
         Assertions.assertEquals("settima visita", firstRecord.getTypeVisit(), "Tipo di visita primo record");
         PatientRecordDTO lastRecord = patientRecordDTOs.get(RookieRepository.LATEST_RECORD_SIZE - 1);
         Assertions.assertEquals("terza visita", lastRecord.getTypeVisit(), "Tipo di visita ultimo record");
+
+        Assertions.assertEquals(List.of(3L, 5L, 7L), qua.getDoctorIds().stream()
+                .sorted()
+                .toList(), "qua doctorIds");
+        Assertions.assertEquals(List.of(3L, 5L), paperone.getDoctorIds().stream()
+                .sorted()
+                .toList(), "paperone doctorIds");
+
     }
 
     @Test
@@ -140,6 +148,9 @@ public class PatientApiTest {
         PatientRecordDTO lastRecord = patientRecordDTOs.get(expectedNumberOfRecords - 1);
         Assertions.assertEquals("prima visita", lastRecord.getTypeVisit(), "Tipo di visita ultimo record");
 
+        Assertions.assertEquals(List.of(3L, 5L, 7L), qua.getDoctorIds().stream()
+                .sorted()
+                .toList(), "qua doctorIds");
     }
 
     @Test
