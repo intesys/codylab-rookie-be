@@ -4,16 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="966e6814-a107-4187-a0e0-64acc19dbcbe" name="Changes" comment="PatientApiTest, PatientRecordApiTest">
+    <list default="true" id="966e6814-a107-4187-a0e0-64acc19dbcbe" name="Changes" comment="test getLatestPatients, doctorIds">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rookie/repository/PatientRecordRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rookie/repository/PatientRecordRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rookie/repository/PatientRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rookie/repository/PatientRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rookie/service/PatientService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rookie/service/PatientService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/rookie/api/DoctorApiTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/rookie/api/DoctorApiTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/rookie/api/PatientApiTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/rookie/api/PatientApiTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/sql/doctors.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/sql/doctors.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/sql/patient_records.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/sql/patient_records.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/sql/patients.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/sql/patients.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/rookie/api/PatientRecordApiTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/rookie/api/PatientRecordApiTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -93,7 +87,7 @@
       <recent name="rookie.dto" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.DoctorApiTest.getDoctorTest">
+  <component name="RunManager" selected="JUnit.DoctorApiTest and 2 more">
     <configuration name="App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="rookie.App" />
       <module name="codylab-rookie-be" />
@@ -107,17 +101,14 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="DoctorApiTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="DoctorApiTest and 2 more" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="codylab-rookie-be" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="rookie.api.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="rookie.api" />
-      <option name="MAIN_CLASS_NAME" value="rookie.api.DoctorApiTest" />
-      <option name="TEST_OBJECT" value="class" />
+      <option name="TEST_OBJECT" value="pattern" />
+      <patterns>
+        <pattern testClass="rookie.api.DoctorApiTest" />
+        <pattern testClass="rookie.api.PatientApiTest" />
+        <pattern testClass="rookie.api.PatientRecordApiTest" />
+      </patterns>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -138,7 +129,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="PatientApiTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="PatientRecordApiTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="codylab-rookie-be" />
       <extension name="coverage">
         <pattern>
@@ -147,13 +138,13 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="rookie.api" />
-      <option name="MAIN_CLASS_NAME" value="rookie.api.PatientApiTest" />
+      <option name="MAIN_CLASS_NAME" value="rookie.api.PatientRecordApiTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="PatientApiTest.getPatientTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="PatientRecordApiTest.getPatientRecordTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="codylab-rookie-be" />
       <extension name="coverage">
         <pattern>
@@ -162,8 +153,8 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="rookie.api" />
-      <option name="MAIN_CLASS_NAME" value="rookie.api.PatientApiTest" />
-      <option name="METHOD_NAME" value="getPatientTest" />
+      <option name="MAIN_CLASS_NAME" value="rookie.api.PatientRecordApiTest" />
+      <option name="METHOD_NAME" value="getPatientRecordTest" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -171,11 +162,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.DoctorApiTest.getDoctorTest" />
-        <item itemvalue="JUnit.DoctorApiTest" />
-        <item itemvalue="JUnit.PatientApiTest" />
-        <item itemvalue="JUnit.PatientApiTest.getPatientTest" />
+        <item itemvalue="JUnit.DoctorApiTest and 2 more" />
         <item itemvalue="Application.App" />
+        <item itemvalue="JUnit.PatientRecordApiTest" />
+        <item itemvalue="JUnit.PatientRecordApiTest.getPatientRecordTest" />
+        <item itemvalue="JUnit.DoctorApiTest.getDoctorTest" />
       </list>
     </recent_temporary>
   </component>
@@ -300,7 +291,14 @@
       <option name="project" value="LOCAL" />
       <updated>1687442737667</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="test getLatestPatients, doctorIds">
+      <created>1687523121852</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1687523121853</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -352,18 +350,10 @@
     <MESSAGE value="DoctorApiTest" />
     <MESSAGE value="DoctorApiTest, getListDoctorTest" />
     <MESSAGE value="PatientApiTest, PatientRecordApiTest" />
-    <option name="LAST_COMMIT_MESSAGE" value="PatientApiTest, PatientRecordApiTest" />
+    <MESSAGE value="test getLatestPatients, doctorIds" />
+    <option name="LAST_COMMIT_MESSAGE" value="test getLatestPatients, doctorIds" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/rookie/repository/PatientRepository.java</url>
-          <line>187</line>
-          <option name="timeStamp" value="5" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
     <watches-manager>
       <configuration name="JUnit">
         <watch expression="firstRecord" />
