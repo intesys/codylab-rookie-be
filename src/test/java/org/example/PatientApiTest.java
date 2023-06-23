@@ -4,6 +4,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.example.api.PatientApi;
 import org.example.dto.PatientDTO;
 import org.example.dto.PatientFilterDTO;
+import org.example.dto.PatientRecordDTO;
+import org.example.repository.RookieRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -35,9 +37,9 @@ public class PatientApiTest {
     @Autowired
     JdbcTemplate db;
 
+
     @Test
     void createPatientTest () throws Exception {
-
         PatientDTO requestDTO = new PatientDTO();
         String expectedName = "Carlo";
         requestDTO.setName(expectedName);
@@ -68,11 +70,10 @@ public class PatientApiTest {
         Assertions.assertEquals(expectedSurname, surname, "surname");
         String email = (String) patientMap.get("email");
         Assertions.assertEquals(expectedEmail, email, "email");
-
     }
 
     @Test
-    @Sql(scripts = "/sql/patients.sql")
+    @Sql(scripts = {"/sql/doctors.sql", "/sql/patients.sql", "/sql/patient_records.sql"})
     void getListPatientTest () throws Exception {
         String expectedSurname = "Pavarana";
         String expectedName1 = "Qua";
@@ -97,16 +98,31 @@ public class PatientApiTest {
         List<PatientDTO> patientDTOs = jsonMapper.readValue(jsonResponse, jsonMapper.getTypeFactory().constructCollectionType(ArrayList.class, PatientDTO.class));
         Assertions.assertNotNull(patientDTOs);
         Assertions.assertEquals(2, patientDTOs.size(), "patientDTOs size");
-        PatientDTO patientDTO1 = patientDTOs.get(0);
-        Assertions.assertEquals(expectedSurname, patientDTO1.getSurname(), "patientDTO1 surname");
-        Assertions.assertEquals(expectedName1, patientDTO1.getName(), "patientDTO1 name");
-        PatientDTO patientDTO2 = patientDTOs.get(1);
-        Assertions.assertEquals(expectedSurname, patientDTO2.getSurname(), "patientDTO2 surname");
-        Assertions.assertEquals(expectedName2, patientDTO2.getName(), "patientDTO2 name");
+        PatientDTO qua = patientDTOs.get(0);
+        Assertions.assertEquals(expectedSurname, qua.getSurname(), "qua surname");
+        Assertions.assertEquals(expectedName1, qua.getName(), "qua name");
+        PatientDTO paperone = patientDTOs.get(1);
+        Assertions.assertEquals(expectedSurname, paperone.getSurname(), "paperone surname");
+        Assertions.assertEquals(expectedName2, paperone.getName(), "paperone name");
+
+        List<PatientRecordDTO> patientRecordDTOs = qua.getPatientRecords();
+        Assertions.assertEquals(RookieRepository.LATEST_RECORD_SIZE, patientRecordDTOs.size(), "Numero di record");
+        PatientRecordDTO firstRecord = patientRecordDTOs.get(0);
+        Assertions.assertEquals("settima visita", firstRecord.getTypeVisit(), "Tipo di visita primo record");
+        PatientRecordDTO lastRecord = patientRecordDTOs.get(RookieRepository.LATEST_RECORD_SIZE - 1);
+        Assertions.assertEquals("terza visita", lastRecord.getTypeVisit(), "Tipo di visita ultimo record");
+
+        Assertions.assertEquals(List.of(3L, 5L, 7L), qua.getDoctorIds().stream()
+                .sorted()
+                .toList(), "qua doctorIds");
+        Assertions.assertEquals(List.of(5L), paperone.getDoctorIds().stream()
+                .sorted()
+                .toList(), "paperone doctorIds");
+
     }
 
     @Test
-    @Sql(scripts = "/sql/patients.sql")
+    @Sql(scripts = {"/sql/doctors.sql", "/sql/patients.sql", "/sql/patient_records.sql"})
     void getPatientTest () throws Exception {
         final Long id = 31L;
         final String name = "Qua";
@@ -119,11 +135,23 @@ public class PatientApiTest {
                 .andReturn();
 
         String jsonResponse = result.getResponse().getContentAsString();
-        PatientDTO patientDTO = jsonMapper.readValue(jsonResponse, PatientDTO.class);
-        Assertions.assertEquals(id, patientDTO.getId(), "id");
-        Assertions.assertEquals(name, patientDTO.getName(), "name");
-        Assertions.assertEquals(surname, patientDTO.getSurname(), "surname");
-        Assertions.assertEquals(email, patientDTO.getEmail(), "email");
+        PatientDTO qua = jsonMapper.readValue(jsonResponse, PatientDTO.class);
+        Assertions.assertEquals(id, qua.getId(), "id");
+        Assertions.assertEquals(name, qua.getName(), "name");
+        Assertions.assertEquals(surname, qua.getSurname(), "surname");
+        Assertions.assertEquals(email, qua.getEmail(), "email");
+
+        List<PatientRecordDTO> patientRecordDTOs = qua.getPatientRecords();
+        final int expectedNumberOfRecords = 7;
+        Assertions.assertEquals(expectedNumberOfRecords, patientRecordDTOs.size(), "Numero di record");
+        PatientRecordDTO firstRecord = patientRecordDTOs.get(0);
+        Assertions.assertEquals("settima visita", firstRecord.getTypeVisit(), "Tipo di visita primo record");
+        PatientRecordDTO lastRecord = patientRecordDTOs.get(expectedNumberOfRecords - 1);
+        Assertions.assertEquals("prima visita", lastRecord.getTypeVisit(), "Tipo di visita ultimo record");
+
+        Assertions.assertEquals(List.of(3L, 5L, 7L), qua.getDoctorIds().stream()
+                .sorted()
+                .toList(), "qua doctorIds");
     }
 
     @Test
@@ -181,3 +209,4 @@ public class PatientApiTest {
     }
 
 }
+
