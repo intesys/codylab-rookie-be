@@ -4,6 +4,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import it.intesys.codylab.rookie.dto.DoctorDTO;
 import it.intesys.codylab.rookie.dto.DoctorFilterDTO;
+import it.intesys.codylab.rookie.dto.PatientDTO;
+import it.intesys.codylab.rookie.repository.RookieRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -71,7 +73,7 @@ public class DoctorApiTest {
     }
 
     @Test
-    @Sql(scripts = "/sql/doctors.sql")
+    @Sql(scripts = {"/sql/doctors.sql", "/sql/patients.sql", "/sql/patient_records.sql"})
     void getListDoctorTest () throws Exception {
         String expectedSurname = "Testsurname";
         String expectedProfession1 = "Nullafacente";
@@ -96,16 +98,23 @@ public class DoctorApiTest {
         List<DoctorDTO> doctorDTOs = jsonMapper.readValue(jsonResponse, jsonMapper.getTypeFactory().constructCollectionType(ArrayList.class, DoctorDTO.class));
         Assertions.assertNotNull(doctorDTOs);
         Assertions.assertEquals(2, doctorDTOs.size(), "doctorDTOs size");
-        DoctorDTO doctorDTO1 = doctorDTOs.get(0);
-        Assertions.assertEquals(expectedSurname, doctorDTO1.getSurname(), "doctorDTO1 surname");
-        Assertions.assertEquals(expectedProfession1, doctorDTO1.getProfession(), "doctorDTO1 profession");
-        DoctorDTO doctorDTO2 = doctorDTOs.get(1);
-        Assertions.assertEquals(expectedSurname, doctorDTO2.getSurname(), "doctorDTO2 surname");
-        Assertions.assertEquals(expectedProfession2, doctorDTO2.getProfession(), "doctorDTO2 profession");
+        DoctorDTO nullafacente = doctorDTOs.get(0);
+        Assertions.assertEquals(expectedSurname, nullafacente.getSurname(), "nullafacente surname");
+        Assertions.assertEquals(expectedProfession1, nullafacente.getProfession(), "nullafacente profession");
+        DoctorDTO calciatore = doctorDTOs.get(1);
+        Assertions.assertEquals(expectedSurname, calciatore.getSurname(), "calciatore surname");
+        Assertions.assertEquals(expectedProfession2, calciatore.getProfession(), "calciatore profession");
+
+        List<PatientDTO> calciatorePatientDTOs = calciatore.getLatestPatients();
+        Assertions.assertEquals(RookieRepository.LATEST_RECORD_SIZE, calciatorePatientDTOs.size(), "Ultimi pazienti del calciatore");
+        Assertions.assertFalse(calciatorePatientDTOs.stream()
+            .map(PatientDTO::getId)
+            .toList()
+            .contains(5L), "Manca il paziente 5");
     }
 
     @Test
-    @Sql(scripts = "/sql/doctors.sql")
+    @Sql(scripts = {"/sql/doctors.sql", "/sql/patients.sql", "/sql/patient_records.sql"})
     void getDoctorTest () throws Exception {
         final Long id = 3L;
         final String name = "Rafaello";
@@ -120,13 +129,17 @@ public class DoctorApiTest {
                 .andReturn();
 
         String jsonResponse = result.getResponse().getContentAsString();
-        DoctorDTO doctorDTO = jsonMapper.readValue(jsonResponse, DoctorDTO.class);
-        Assertions.assertEquals(id, doctorDTO.getId(), "id");
-        Assertions.assertEquals(name, doctorDTO.getName(), "name");
-        Assertions.assertEquals(surname, doctorDTO.getSurname(), "surname");
-        Assertions.assertEquals(phoneNumber, doctorDTO.getPhoneNumber(), "phoneNumber");
-        Assertions.assertEquals(email, doctorDTO.getEmail(), "email");
-        Assertions.assertEquals(profession, doctorDTO.getProfession(), "profession");
+        DoctorDTO arrotino = jsonMapper.readValue(jsonResponse, DoctorDTO.class);
+        Assertions.assertEquals(id, arrotino.getId(), "id");
+        Assertions.assertEquals(name, arrotino.getName(), "name");
+        Assertions.assertEquals(surname, arrotino.getSurname(), "surname");
+        Assertions.assertEquals(phoneNumber, arrotino.getPhoneNumber(), "phoneNumber");
+        Assertions.assertEquals(email, arrotino.getEmail(), "email");
+        Assertions.assertEquals(profession, arrotino.getProfession(), "profession");
+
+        List<PatientDTO> calciatorePatientDTOs = arrotino.getLatestPatients();
+        Assertions.assertEquals(1, calciatorePatientDTOs.size(), "Ultimi pazienti del calciatore");
+        Assertions.assertEquals(31L, calciatorePatientDTOs.get(0).getId(), "Id del paziente");
     }
 
     @Test
