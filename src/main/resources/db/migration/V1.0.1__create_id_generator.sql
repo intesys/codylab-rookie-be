@@ -1,1 +1,1 @@
-create sequence id_generator;
+CREATE SEQUENCE id_generator;
