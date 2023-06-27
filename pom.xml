@@ -5,17 +5,19 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.example</groupId>
-    <artifactId>app</artifactId>
+    <artifactId>codylab-rookie-be</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
+        <flyway.version>9.8.1</flyway.version>
+        <h2.version>2.1.214</h2.version>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
-        <spring-boot.version>3.0.0</spring-boot.version>
         <postgresql.version>42.6.0</postgresql.version>
-        <flyway.version>9.8.1</flyway.version>
+        <spring-boot.version>3.0.0</spring-boot.version>
         <springdoc.version>2.0.2</springdoc.version>
-        <h2.version>2.1.214</h2.version>
+        <surefire.version>3.1.2</surefire.version>
+        <exec.version>3.1.0</exec.version>
     </properties>
 
     <dependencies>
@@ -53,11 +55,9 @@
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
-            <scope>test</scope>
             <version>${h2.version}</version>
+            <scope>test</scope>
         </dependency>
-
-
 
     </dependencies>
 
@@ -66,7 +66,15 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.1.2</version>
+                <version>${surefire.version}</version>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>${exec.version}</version>
+                <configuration>
+                    <mainClass>it.intesys.codylab.rookie.App</mainClass>
+                </configuration>
             </plugin>
         </plugins>
     </build>
