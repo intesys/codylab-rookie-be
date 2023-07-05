@@ -4,11 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="28453e8c-e06f-4a7d-8733-bb08812ce15d" name="Changes" comment="Modifica classi e creazione test automatici">
+    <list default="true" id="28453e8c-e06f-4a7d-8733-bb08812ce15d" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/it/intesys/codylab/rookie/DoctorApiTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/it/intesys/codylab/rookie/DoctorApiTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/it/intesys/codylab/rookie/PatientApiTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/it/intesys/codylab/rookie/PatientApiTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/sql/patient_records.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/sql/patient_records.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/intesys/codylab/rookie/api/DoctorApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/intesys/codylab/rookie/api/DoctorApi.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/application.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,7 +71,7 @@
       <recent name="it.intesys.codylab.rookie" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.PatientRecordApiTest">
+  <component name="RunManager" selected="Application.it.intesys.codylab.rookie.App">
     <configuration name="it.intesys.codylab.rookie.App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="it.intesys.codylab.rookie.App" />
       <module name="codylab-rookie-be" />
@@ -148,11 +149,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.it.intesys.codylab.rookie.App" />
+        <item itemvalue="JUnit.DoctorApiTest.createDoctorTest" />
         <item itemvalue="JUnit.PatientRecordApiTest" />
         <item itemvalue="JUnit.DoctorApiTest" />
         <item itemvalue="JUnit.DoctorApiTest.getListDoctorTest" />
-        <item itemvalue="Application.it.intesys.codylab.rookie.App" />
-        <item itemvalue="JUnit.DoctorApiTest.createDoctorTest" />
       </list>
     </recent_temporary>
   </component>
