@@ -1,30 +1,31 @@
 package it.intesys.codylab.rookie.api;
 
-
-
 import it.intesys.codylab.rookie.dto.PatientDTO;
 import it.intesys.codylab.rookie.dto.PatientFilterDTO;
+import it.intesys.codylab.rookie.exeptions.NotFound;
 import it.intesys.codylab.rookie.service.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import it.intesys.codylab.rookie.exeptions.NotFound;
 
 import java.util.List;
 
 @RestController
 public class PatientApi extends RookieAPI {
+    public static final String API_PATIENT_ID = "/api/patient/{id}";
+    public static final String API_PATIENT = "/api/patient";
+    public static final String API_PATIENT_FILTER = "/api/patient/filter";
     @Autowired
     private PatientService patientService;
 
-    @PostMapping ("/api/patient")
+    @PostMapping (API_PATIENT)
     ResponseEntity<PatientDTO> createPatient (@RequestBody PatientDTO patientDTO) {
         patientDTO = patientService.createPatient(patientDTO);
         return ResponseEntity.ok(patientDTO);
     }
 
-    @PostMapping ("/api/patient/filter")
+    @PostMapping (API_PATIENT_FILTER)
     ResponseEntity<List<PatientDTO>> getListPatient (@RequestParam("page") Integer pageIndex, @RequestParam("size") Integer size, @RequestParam ("sort") String sort, @RequestBody PatientFilterDTO filter) {
         Pageable pageable = pageable (pageIndex, size, sort);
 
@@ -32,7 +33,7 @@ public class PatientApi extends RookieAPI {
         return ResponseEntity.ok(patientDTOs);
     }
 
-    @GetMapping("/api/patient/{id}")
+    @GetMapping(API_PATIENT_ID)
     ResponseEntity<PatientDTO> getPatient (@PathVariable Long id) {
         try {
             PatientDTO dto = patientService.getPatient(id);
@@ -42,7 +43,7 @@ public class PatientApi extends RookieAPI {
         }
     }
 
-    @PutMapping("/api/patient/{id}")
+    @PutMapping(API_PATIENT_ID)
     ResponseEntity<Void> updatePatient (@PathVariable Long id, @RequestBody PatientDTO patientDTO) {
         try {
             patientDTO.setId(id);
@@ -53,7 +54,7 @@ public class PatientApi extends RookieAPI {
         }
     }
 
-    @DeleteMapping("/api/patient/{id}")
+    @DeleteMapping(API_PATIENT_ID)
     ResponseEntity<Void> deletePatient (@PathVariable Long id) {
         try {
             patientService.deletePatient (id);

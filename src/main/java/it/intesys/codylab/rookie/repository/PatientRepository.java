@@ -1,14 +1,14 @@
 package it.intesys.codylab.rookie.repository;
 
+import it.intesys.codylab.rookie.domain.BloodGroup;
 import it.intesys.codylab.rookie.domain.Doctor;
+import it.intesys.codylab.rookie.domain.Patient;
+import it.intesys.codylab.rookie.exeptions.NotFound;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Pageable;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
-import it.intesys.codylab.rookie.domain.BloodGroup;
-import it.intesys.codylab.rookie.domain.Patient;
-import it.intesys.codylab.rookie.exeptions.NotFound;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -84,7 +84,8 @@ public class PatientRepository extends RookieRepository {
         List<Object> parameterList = new ArrayList<>();
 
         if (text != null && !text.isBlank()) {
-            buffer.append(whereOrAnd).append(' ').append("name like concat ('%', ?, '%') or surname like concat ('%', ?, '%') or email like concat ('%', ?, '%') ");            whereOrAnd = and;
+            buffer.append(whereOrAnd).append(' ').append("name like concat ('%', ?, '%') or surname like concat ('%', ?, '%') or email like concat ('%', ?, '%') ");
+            whereOrAnd = and;
             parameterList.addAll(List.of(text, text, text));
         }
 
@@ -107,10 +108,11 @@ public class PatientRepository extends RookieRepository {
         }
 
         if (doctorId != null) {
-            buffer.append(whereOrAnd).append(' ').append("doctorId = ? ");
+            buffer.append(whereOrAnd).append(' ').append("exists (select 1 from patient_record where patient_id = id and doctor_id = ?) ");
             whereOrAnd = and;
             parameterList.add(doctorId);
         }
+
 
         String query = page (buffer, pageable);
 
@@ -190,5 +192,4 @@ public class PatientRepository extends RookieRepository {
                 .map(this::findById)
                 .toList();
     }
-
 }

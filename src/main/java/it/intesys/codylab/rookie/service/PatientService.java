@@ -1,21 +1,23 @@
 package it.intesys.codylab.rookie.service;
 
-
 import it.intesys.codylab.rookie.domain.Doctor;
+import it.intesys.codylab.rookie.domain.Patient;
+import it.intesys.codylab.rookie.domain.PatientRecord;
+import it.intesys.codylab.rookie.dto.PatientDTO;
+import it.intesys.codylab.rookie.dto.PatientFilterDTO;
+import it.intesys.codylab.rookie.dto.PatientRecordDTO;
+import it.intesys.codylab.rookie.exeptions.NotFound;
+import it.intesys.codylab.rookie.mapper.PatientMapper;
 import it.intesys.codylab.rookie.mapper.PatientRecordMapper;
 import it.intesys.codylab.rookie.repository.DoctorRepository;
 import it.intesys.codylab.rookie.repository.PatientRecordRepository;
+import it.intesys.codylab.rookie.repository.PatientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import it.intesys.codylab.rookie.domain.Patient;
-import it.intesys.codylab.rookie.dto.PatientDTO;
-import it.intesys.codylab.rookie.dto.PatientFilterDTO;
-import it.intesys.codylab.rookie.exeptions.NotFound;
-import it.intesys.codylab.rookie.mapper.PatientMapper;
-import it.intesys.codylab.rookie.repository.PatientRepository;
 
 import java.util.List;
+import java.util.function.Function;
 
 @Service
 public class PatientService {
@@ -44,14 +46,17 @@ public class PatientService {
     public List<PatientDTO> getListPatient(Pageable pageable, PatientFilterDTO filter) {
         List<Patient> patients = patientRepository.getPatients (pageable, filter.getText(), filter.getId(), filter.getOpd(), filter.getIdp(), filter.getDoctorId());
         return patients.stream()
-                .map(this::toDTO)
+                .map(patient -> this.toDTO (patient, false))
                 .toList();
     }
 
-    private PatientDTO toDTO(Patient patient) {
+    private PatientDTO toDTO(Patient patient, boolean allRecord) {
         PatientDTO patientDTO = mapper.toDTO(patient);
 
-        patientDTO.setPatientRecords(patientRecordRepository.findLatestRecordByPatient (patient)
+        Function<Patient, List<PatientRecord>> recordProvider =
+                allRecord? patientRecordRepository::findByPatient: patientRecordRepository::findLatestRecordByPatient;
+
+        patientDTO.setPatientRecords(recordProvider.apply(patient)
                 .stream()
                 .map(patientRecordMapper::toDTO)
                 .toList());
@@ -66,7 +71,7 @@ public class PatientService {
 
     public PatientDTO getPatient(Long id) throws NotFound {
         Patient patient = patientRepository.findById (id);
-        return toDTO(patient);
+        return toDTO(patient, true);
     }
 
     public void updatePatient(PatientDTO patientDTO)  throws NotFound {
