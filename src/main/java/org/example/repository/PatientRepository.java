@@ -17,7 +17,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-
 @Repository
 public class PatientRepository extends RookieRepository {
     @Autowired
@@ -78,14 +77,14 @@ public class PatientRepository extends RookieRepository {
     }
 
     public List<Patient> getPatients(Pageable pageable, String text, Long id, Long opd, Long idp, Long doctorId) {
-        StringBuilder buffer = new StringBuilder("select * from patient ");
+        StringBuilder buffer = new StringBuilder("select * from patient a ");
         String whereOrAnd = "where";
         final String and = "and";
 
         List<Object> parameterList = new ArrayList<>();
 
         if (text != null && !text.isBlank()) {
-            buffer.append(whereOrAnd).append(' ').append("name like concat ('%', '?', '%') or surname like concat ('%', '?', '%') or email like  concat ('%', '?', '%') ");
+            buffer.append(whereOrAnd).append(' ').append("name like concat ('%', ?, '%') or surname like concat ('%', ?, '%') or email like concat ('%', ?, '%') ");
             whereOrAnd = and;
             parameterList.addAll(List.of(text, text, text));
         }
@@ -109,10 +108,11 @@ public class PatientRepository extends RookieRepository {
         }
 
         if (doctorId != null) {
-            buffer.append(whereOrAnd).append(' ').append("doctorId = ? ");
+            buffer.append(whereOrAnd).append(' ').append("exists (select 1 from patient_record b where b.patient_id = a.id and b.doctor_id = ?) ");
             whereOrAnd = and;
             parameterList.add(doctorId);
         }
+
 
         String query = page (buffer, pageable);
 
