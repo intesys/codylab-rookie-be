@@ -1,0 +1,16 @@
+server:
+  port : 8081
+
+spring:
+  #https://www.baeldung.com/database-migrations-with-flyway
+  #docker run --env=POSTGRES_PASSWORD=admin -p 5433:5432 -d postgres:latest
+  datasource:
+    driver-class-name: org.testcontainers.jdbc.ContainerDatabaseDriver
+    url: jdbc:tc:postgresql:16.3:///rookie
+    username: SA
+    password: A_Str0ng_Required_Password
+
+springdoc:
+  swagger-ui:
+    url: /v3/api-docs.yaml
+
