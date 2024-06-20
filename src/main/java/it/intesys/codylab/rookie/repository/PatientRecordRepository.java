@@ -4,6 +4,7 @@ import it.intesys.codylab.rookie.domain.Doctor;
 import it.intesys.codylab.rookie.domain.Patient;
 import it.intesys.codylab.rookie.domain.PatientRecord;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
@@ -79,7 +80,11 @@ public class PatientRecordRepository extends RookieRepository {
         return patientRecord;
     }
     public PatientRecord findById(Long id) {
-        return db.queryForObject("select * from patient_record where id = ? ", this::map, id);
+        try {
+            return db.queryForObject("select * from patient_record where id = ? ", this::map, id);
+        } catch (EmptyResultDataAccessException e) {
+            return null;
+        }
     }
 
     public void deleteById(Long id) {

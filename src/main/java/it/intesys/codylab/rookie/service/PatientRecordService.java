@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -60,7 +61,7 @@ public class PatientRecordService {
 
     public PatientRecordDTO getPatientRecord(Long id) {
         PatientRecord patientRecord = patientRecordRepository.findById(id);
-        return mapper.toDTO(patientRecord);
+        return Optional.ofNullable(patientRecord).map(mapper::toDTO).orElse(null);
     }
 
     public void deletePatientRecord(Long id) {

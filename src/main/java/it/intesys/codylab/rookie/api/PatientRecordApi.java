@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 /*
     https://spring.io/guides/tutorials/rest/
  */
@@ -30,8 +32,9 @@ public class PatientRecordApi {
 
     @GetMapping(API_DOCTOR_ID)
     public ResponseEntity<PatientRecordDTO> getPatientRecord (@PathVariable("id") Long id) {
-        PatientRecordDTO patientRecordDTO = patientRecordService.getPatientRecord (id);
-        return ResponseEntity.ok(patientRecordDTO);
+        return Optional.ofNullable(patientRecordService.getPatientRecord (id))
+                .map(ResponseEntity::ok)
+                .orElse (ResponseEntity.notFound().build());
     }
 
     @DeleteMapping(API_DOCTOR_ID)

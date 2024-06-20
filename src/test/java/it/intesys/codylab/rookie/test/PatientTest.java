@@ -207,7 +207,7 @@ public class PatientTest {
     }
 
     @NotNull
-    private PatientDTO newPatient(List<DoctorDTO> doctors) {
+    public static PatientDTO newPatient(List<DoctorDTO> doctors) {
         PatientDTO patient = new PatientDTO();
         patient.setAddress(ADDRESS);
         patient.setAvatar(AVATAR);
@@ -225,7 +225,7 @@ public class PatientTest {
     }
 
     @NotNull
-    private PatientDTO newPatient2() {
+    public static PatientDTO newPatient2() {
         PatientDTO patient = new PatientDTO();
         patient.setAddress(ADDRESS2);
         patient.setAvatar(AVATAR2);
@@ -242,6 +242,10 @@ public class PatientTest {
     }
 
     private PatientDTO createPatient(PatientDTO patient) throws Exception {
+        return createPatient(patient, objectMapper, mockMvc);
+    }
+
+    public static PatientDTO createPatient(PatientDTO patient, ObjectMapper objectMapper, MockMvc mockMvc) throws Exception {
         MockHttpServletResponse response = mockMvc.perform(MockMvcRequestBuilders.post("/api/patient")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(patient))).andReturn().getResponse();
