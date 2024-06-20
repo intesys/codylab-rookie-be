@@ -135,6 +135,31 @@ public class DoctorTest {
         assertEquals(doctor.getSurname(), SURNAME);
     }
 
+    @Test
+    public void testDeleteDoctor() throws Exception {
+        DoctorDTO doctor = createDoctor();
+
+        MockHttpServletResponse response = mockMvc.perform(MockMvcRequestBuilders.get("/api/doctor/" + doctor.getId())
+                .contentType(MediaType.APPLICATION_JSON)).andReturn().getResponse();
+        assertEquals(response.getStatus(), 200);
+
+        response = mockMvc.perform(MockMvcRequestBuilders.delete("/api/doctor/" + doctor.getId())
+                .contentType(MediaType.APPLICATION_JSON)).andReturn().getResponse();
+        assertEquals(response.getStatus(), 200);
+
+        response = mockMvc.perform(MockMvcRequestBuilders.get("/api/doctor/" + doctor.getId())
+                .contentType(MediaType.APPLICATION_JSON)).andReturn().getResponse();
+        assertEquals(response.getStatus(), 404);
+
+        assertEquals(doctor.getAddress(), ADDRESS);
+        assertEquals(doctor.getAvatar(), AVATAR);
+        assertEquals(doctor.getEmail(), EMAIL);
+        assertEquals(doctor.getName(), NAME);
+        assertEquals(doctor.getPhoneNumber(), PHONE_NUMBER);
+        assertEquals(doctor.getProfession(), PROFESSION);
+        assertEquals(doctor.getSurname(), SURNAME);
+    }
+
     private DoctorDTO getDoctor(Long id) throws Exception {
         MockHttpServletResponse response = mockMvc.perform(MockMvcRequestBuilders.get("/api/doctor/" + id)
                 .contentType(MediaType.APPLICATION_JSON)).andReturn().getResponse();
