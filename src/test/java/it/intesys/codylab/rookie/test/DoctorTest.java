@@ -123,10 +123,8 @@ public class DoctorTest {
 
     @Test
     public void testGetDoctor() throws Exception {
-        createDoctor();
-
-        Long id = 1L;
-        DoctorDTO doctor = getDoctor(id);
+        DoctorDTO doctor = createDoctor();
+        doctor = getDoctor(doctor.getId());
 
         assertEquals(doctor.getAddress(), ADDRESS);
         assertEquals(doctor.getAvatar(), AVATAR);
