@@ -42,6 +42,13 @@ public class DoctorTest {
     public static final String PHONE_NUMBER2 = "7777777777";
     public static final String PROFESSION2 = "IT Architect";
     public static final String SURNAME2 = "Costanzi";
+    public static final String ADDRESS3 = "Via Tevere";
+    public static final String AVATAR3 = "base64 image 3";
+    public static final String EMAIL3 = "paolo.qualg@intesys.it";
+    public static final String NAME3 = "Paolo";
+    public static final String PHONE_NUMBER3 = "8888888888";
+    public static final String PROFESSION3 = "IT Leader";
+    public static final String SURNAME3 = "Quaglia";
     @Autowired
     private WebApplicationContext applicationContext;
     private  ObjectMapper objectMapper = new ObjectMapper();
@@ -161,14 +168,17 @@ public class DoctorTest {
         assertEquals(SURNAME2, doctor.getSurname());
     }
 
-    private DoctorDTO createDoctor () throws Exception {
+    public DoctorDTO createDoctor () throws Exception {
         DoctorDTO doctor = newDoctor();
 
         return createDoctor(doctor);
     }
 
+    public DoctorDTO createDoctor (DoctorDTO doctor) throws Exception {
+        return createDoctor(doctor, objectMapper, mockMvc);
+    }
     @NotNull
-    private DoctorDTO newDoctor() {
+    public static DoctorDTO newDoctor() {
         DoctorDTO doctor = new DoctorDTO();
         doctor.setAddress(ADDRESS);
         doctor.setAvatar(AVATAR);
@@ -181,7 +191,7 @@ public class DoctorTest {
     }
 
     @NotNull
-    private DoctorDTO newDoctor2() {
+    public static DoctorDTO newDoctor2() {
         DoctorDTO doctor = new DoctorDTO();
         doctor.setAddress(ADDRESS2);
         doctor.setAvatar(AVATAR2);
@@ -193,7 +203,20 @@ public class DoctorTest {
         return doctor;
     }
 
-    private DoctorDTO createDoctor(DoctorDTO doctor) throws Exception {
+    @NotNull
+    public static DoctorDTO newDoctor3() {
+        DoctorDTO doctor = new DoctorDTO();
+        doctor.setAddress(ADDRESS3);
+        doctor.setAvatar(AVATAR3);
+        doctor.setEmail(EMAIL3);
+        doctor.setName(NAME3);
+        doctor.setPhoneNumber(PHONE_NUMBER3);
+        doctor.setProfession(PROFESSION3);
+        doctor.setSurname(SURNAME3);
+        return doctor;
+    }
+
+    public static DoctorDTO createDoctor(DoctorDTO doctor, ObjectMapper objectMapper, MockMvc mockMvc) throws Exception {
         MockHttpServletResponse response = mockMvc.perform(MockMvcRequestBuilders.post("/api/doctor")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(doctor))).andReturn().getResponse();
@@ -232,14 +255,6 @@ public class DoctorTest {
         response = mockMvc.perform(MockMvcRequestBuilders.get("/api/doctor/" + doctor.getId())
                 .contentType(MediaType.APPLICATION_JSON)).andReturn().getResponse();
         assertEquals(response.getStatus(), 404);
-
-        assertEquals(doctor.getAddress(), ADDRESS);
-        assertEquals(doctor.getAvatar(), AVATAR);
-        assertEquals(doctor.getEmail(), EMAIL);
-        assertEquals(doctor.getName(), NAME);
-        assertEquals(doctor.getPhoneNumber(), PHONE_NUMBER);
-        assertEquals(doctor.getProfession(), PROFESSION);
-        assertEquals(doctor.getSurname(), SURNAME);
     }
 
     private DoctorDTO getDoctor(Long id) throws Exception {

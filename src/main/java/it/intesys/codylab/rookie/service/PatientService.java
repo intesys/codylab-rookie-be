@@ -71,9 +71,13 @@ public class PatientService {
 
     public PatientDTO getPatient(Long id) {
         Patient patient = patientRepository.findById(id);
-        List<PatientRecord> patientRecords = patientRecordRepository.findByPatient(patient);
-        patient.setPatientRecords(patientRecords);
-        return toDTO(patient);
+        if (patient != null) {
+            List<PatientRecord> patientRecords = patientRecordRepository.findByPatient(patient);
+            patient.setPatientRecords(patientRecords);
+            return toDTO(patient);
+        } else {
+            return null;
+        }
     }
 
     public void deletePatient(Long id) {

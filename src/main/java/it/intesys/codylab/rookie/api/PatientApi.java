@@ -54,7 +54,9 @@ public class PatientApi {
     @GetMapping(API_DOCTOR_ID)
     public ResponseEntity<PatientDTO> getPatient (@PathVariable("id") Long id) {
         PatientDTO patientDTO = patientService.getPatient (id);
-        return ResponseEntity.ok(patientDTO);
+        if (patientDTO != null)
+            return ResponseEntity.ok(patientDTO);
+        return ResponseEntity.notFound().build();
     }
 
     @DeleteMapping(API_DOCTOR_ID)

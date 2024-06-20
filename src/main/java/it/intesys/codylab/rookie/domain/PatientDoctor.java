@@ -22,6 +22,7 @@ public class PatientDoctor {
     public PatientDoctor(Patient patient, Doctor doctor) {
         this.patient = patient;
         this.doctor = doctor;
+        this.date = Instant.now();
     }
 
     public Patient getPatient() {

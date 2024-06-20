@@ -3,6 +3,7 @@ package it.intesys.codylab.rookie.mapper;
 import it.intesys.codylab.rookie.domain.BloodGroup;
 import it.intesys.codylab.rookie.domain.Doctor;
 import it.intesys.codylab.rookie.domain.Patient;
+import it.intesys.codylab.rookie.domain.PatientDoctor;
 import it.intesys.codylab.rookie.dto.BloodGroupDTO;
 import it.intesys.codylab.rookie.dto.PatientDTO;
 import it.intesys.codylab.rookie.repository.DoctorRepository;
@@ -37,6 +38,8 @@ public class PatientMapper {
         patient.setOpd(patientDTO.getOpd());
         patient.setPhoneNumber(patientDTO.getPhoneNumber());
         patient.setSurname(patientDTO.getSurname());
+        if (patientDTO.getDoctorIds() != null)
+            patient.setDoctors(patientDTO.getDoctorIds().stream().map(doctorId -> new PatientDoctor(patient, doctorRepository.findById(doctorId))).toList());
 
         return patient;
     }

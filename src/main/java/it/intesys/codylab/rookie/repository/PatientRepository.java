@@ -5,6 +5,7 @@ import it.intesys.codylab.rookie.domain.Doctor;
 import it.intesys.codylab.rookie.domain.Patient;
 import it.intesys.codylab.rookie.domain.PatientDoctor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Repository;
 
@@ -71,6 +72,7 @@ public class PatientRepository extends RookieRepository {
 
             List<PatientDoctor> insertions = subtract(patientDoctors, currentDoctors);
             List<PatientDoctor> updates = intersect(patientDoctors, currentDoctors);
+            List<PatientDoctor> deletions = subtract(currentDoctors, patientDoctors);
             db.batchUpdate("insert into patient_doctor (patient_id, doctor_id, date) values (?, ?, ?)", insertions, 100, (statement, op) -> {
                 statement.setLong(1, op.getPatient().getId());
                 statement.setLong(2, op.getDoctor().getId());
@@ -80,6 +82,10 @@ public class PatientRepository extends RookieRepository {
                 statement.setTimestamp(1, Timestamp.from(op.getDate()));
                 statement.setLong(2, op.getPatient().getId());
                 statement.setLong(3, op.getDoctor().getId());
+            });
+            db.batchUpdate("delete from patient_doctor where patient_id = ? and doctor_id = ?", deletions, 100, (statement, op) -> {
+                statement.setLong(1, op.getPatient().getId());
+                statement.setLong(2, op.getDoctor().getId());
             });
         }
     }
@@ -196,7 +202,11 @@ public class PatientRepository extends RookieRepository {
     }
 
     public Patient findById(Long id) {
-        return db.queryForObject("select * from patient where id = ? ", this::map, id);
+        try {
+            return db.queryForObject("select * from patient where id = ? ", this::map, id);
+        } catch (EmptyResultDataAccessException e) {
+            return null;
+        }
     }
 
     public void deleteById(Long id) {
