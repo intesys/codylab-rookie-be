@@ -2,6 +2,8 @@ package it.intesys.codylab.rookie.test;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.json.JsonMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import it.intesys.codylab.rookie.App;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Before;
@@ -54,7 +56,7 @@ public class PatientTest {
     public static final long OPD2 = 4L;
     @Autowired
     private WebApplicationContext applicationContext;
-    private  ObjectMapper objectMapper = new ObjectMapper();
+    private final ObjectMapper objectMapper = JsonMapper.builder ().addModule(new JavaTimeModule()).build();
 
     private MockMvc mockMvc;
 
